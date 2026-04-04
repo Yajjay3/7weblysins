@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "7 WebLY Sins",
+  "version": "2.1",
+  "description": "A gentle reminder to avoid the 7 deadly sins as you browse the web.",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "permissions": ["storage", "tabs"],
+  "host_permissions": ["https://extensionpay.com/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "7 WebLY Sins",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["scroll-bg.svg"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

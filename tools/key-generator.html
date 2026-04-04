@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>7 WebLY Sins — License Key Generator</title>
+  <style>
+    body { font-family: -apple-system, sans-serif; background: #1a1a2e; color: #eee; padding: 40px; max-width: 700px; margin: 0 auto; }
+    h1 { text-align: center; margin-bottom: 8px; }
+    .subtitle { text-align: center; color: #888; margin-bottom: 30px; }
+    .section { background: rgba(255,255,255,0.05); padding: 24px; border-radius: 12px; margin-bottom: 20px; }
+    h3 { margin-bottom: 12px; color: #ffd54f; }
+    p { color: #bbb; line-height: 1.6; font-size: 14px; }
+    button {
+      background: linear-gradient(135deg, #ffd54f, #ff6f00); color: #1a1a2e;
+      border: none; padding: 12px 28px; border-radius: 8px; font-weight: 700;
+      cursor: pointer; font-size: 14px; margin-top: 12px;
+    }
+    button:hover { opacity: 0.9; }
+    .key-display {
+      font-family: monospace; font-size: 20px; font-weight: 700;
+      background: rgba(255,255,255,0.08); padding: 14px 20px;
+      border-radius: 8px; text-align: center; margin: 16px 0;
+      color: #4fc3f7; letter-spacing: 2px; user-select: all;
+    }
+    .batch { margin-top: 12px; }
+    .batch textarea {
+      width: 100%; height: 200px; background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15); border-radius: 8px;
+      color: #eee; font-family: monospace; padding: 12px; font-size: 13px;
+      resize: vertical;
+    }
+    .info { font-size: 12px; color: #666; margin-top: 8px; }
+    code { background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>🔑 License Key Generator</h1>
+  <p class="subtitle">Generate license keys for 7 WebLY Sins Premium customers. Keep this file private!</p>
+
+  <div class="section">
+    <h3>Generate a Single Key</h3>
+    <p>Click the button to generate a valid premium license key.</p>
+    <button onclick="generateOne()">Generate Key</button>
+    <div class="key-display" id="single-key">Click Generate to create a key</div>
+    <button onclick="copyKey()" style="background: rgba(255,255,255,0.1); color: #fff;">📋 Copy</button>
+  </div>
+
+  <div class="section">
+    <h3>Generate Batch Keys</h3>
+    <p>Generate multiple keys at once (e.g., for pre-loading into Stripe fulfillment).</p>
+    <div style="display:flex; align-items:center; gap:12px; margin: 12px 0;">
+      <label style="font-size:14px;">How many:</label>
+      <input type="number" id="batch-count" value="10" min="1" max="500"
+        style="width:80px; padding:8px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); border-radius:6px; color:#eee; font-size:14px;">
+      <button onclick="generateBatch()">Generate Batch</button>
+    </div>
+    <div class="batch">
+      <textarea id="batch-keys" readonly placeholder="Batch keys will appear here..."></textarea>
+    </div>
+    <button onclick="copyBatch()" style="background: rgba(255,255,255,0.1); color: #fff;">📋 Copy All</button>
+    <button onclick="downloadBatch()" style="background: rgba(255,255,255,0.1); color: #fff;">💾 Download CSV</button>
+  </div>
+
+  <div class="section">
+    <h3>How It Works</h3>
+    <p>Keys use the format: <code>7WS-XXXX-XXXX-XXXX</code></p>
+    <p>Each key contains a built-in checksum that the extension validates offline — no server needed.</p>
+    <p>You provide these keys to customers after they purchase through Stripe (see setup instructions).</p>
+    <p class="info">⚠️ Keep this generator private. Anyone with access could create unlimited keys.</p>
+  </div>
+
+  <script>
+    // Key generation with checksum
+    // Format: 7WS-XXXX-XXXX-XXXX where last 4 chars are derived from first 8
+    const CHARSET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // No I, O, 0, 1 to avoid confusion
+    const SECRET = 'W3bLySins2026';
+
+    function generateKeyParts() {
+      let part1 = '', part2 = '';
+      for (let i = 0; i < 4; i++) {
+        part1 += CHARSET[Math.floor(Math.random() * CHARSET.length)];
+        part2 += CHARSET[Math.floor(Math.random() * CHARSET.length)];
+      }
+      return [part1, part2];
+    }
+
+    function computeChecksum(part1, part2) {
+      // Simple hash-based checksum
+      const input = SECRET + part1 + part2 + SECRET;
+      let hash = 0;
+      for (let i = 0; i < input.length; i++) {
+        const char = input.charCodeAt(i);
+        hash = ((hash << 5) - hash + char) | 0;
+      }
+      // Convert hash to 4 characters from charset
+      let check = '';
+      let h = Math.abs(hash);
+      for (let i = 0; i < 4; i++) {
+        check += CHARSET[h % CHARSET.length];
+        h = Math.floor(h / CHARSET.length);
+      }
+      return check;
+    }
+
+    function generateKey() {
+      const [p1, p2] = generateKeyParts();
+      const p3 = computeChecksum(p1, p2);
+      return '7WS-' + p1 + '-' + p2 + '-' + p3;
+    }
+
+    function generateOne() {
+      document.getElementById('single-key').textContent = generateKey();
+    }
+
+    function generateBatch() {
+      const count = parseInt(document.getElementById('batch-count').value) || 10;
+      const keys = [];
+      for (let i = 0; i < count; i++) {
+        keys.push(generateKey());
+      }
+      document.getElementById('batch-keys').value = keys.join('\n');
+    }
+
+    function copyKey() {
+      const key = document.getElementById('single-key').textContent;
+      if (key && !key.includes('Click')) {
+        navigator.clipboard.writeText(key);
+      }
+    }
+
+    function copyBatch() {
+      const textarea = document.getElementById('batch-keys');
+      navigator.clipboard.writeText(textarea.value);
+    }
+
+    function downloadBatch() {
+      const keys = document.getElementById('batch-keys').value;
+      if (!keys) return;
+      const blob = new Blob(['license_key\n' + keys], { type: 'text/csv' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = '7wls-license-keys.csv';
+      a.click();
+    }
+  </script>
+</body>
+</html>

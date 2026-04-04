@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — The 7 WebLY Sins</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #0a0a1a; color: #e0e0e0; line-height: 1.8;
+    }
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      background: rgba(10, 10, 26, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 14px 0;
+    }
+    .nav-inner {
+      max-width: 800px; margin: 0 auto; padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { font-size: 20px; font-weight: 800; color: #fff; text-decoration: none; }
+    .nav-logo span { color: #ff6f00; }
+    .content {
+      max-width: 800px; margin: 0 auto; padding: 100px 24px 60px;
+    }
+    h1 {
+      font-size: 36px; font-weight: 800; color: #fff; margin-bottom: 8px;
+    }
+    .last-updated { font-size: 13px; color: #666; margin-bottom: 40px; }
+    h2 {
+      font-size: 20px; font-weight: 700; color: #fff;
+      margin-top: 36px; margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    p { font-size: 15px; color: #bbb; margin-bottom: 16px; }
+    ul { margin: 0 0 16px 24px; }
+    li { font-size: 15px; color: #bbb; margin-bottom: 6px; }
+    strong { color: #eee; }
+    a { color: #4fc3f7; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .highlight {
+      background: rgba(79, 195, 247, 0.08);
+      border-left: 3px solid #4fc3f7;
+      padding: 16px 20px; border-radius: 8px;
+      margin: 20px 0;
+    }
+    .highlight p { margin-bottom: 0; }
+    footer {
+      text-align: center; padding: 32px 24px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      font-size: 13px; color: #444;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">⚠️ The 7 <span>WebLY</span> Sins</a>
+      <a href="index.html" style="color:#aaa; text-decoration:none; font-size:14px; font-weight:600;">← Back to Home</a>
+    </div>
+  </nav>
+
+  <div class="content">
+    <h1>Privacy Policy</h1>
+    <p class="last-updated">Last updated: March 31, 2026</p>
+
+    <div class="highlight">
+      <p><strong>The short version:</strong> We don't collect, store, or transmit any of your data. Everything stays on your device. Period.</p>
+    </div>
+
+    <h2>1. Overview</h2>
+    <p>The 7 WebLY Sins ("the Extension") is a Chrome browser extension that provides gentle reminders about browsing habits based on the framework of the seven deadly sins. This privacy policy explains how we handle your information.</p>
+
+    <h2>2. Data We Collect</h2>
+    <p><strong>None.</strong> The 7 WebLY Sins does not collect, transmit, or store any personal data on external servers. We have no servers, no databases, no analytics, and no tracking.</p>
+
+    <h2>3. Data Stored Locally on Your Device</h2>
+    <p>The Extension uses Chrome's <code style="background:rgba(255,255,255,0.1); padding:2px 6px; border-radius:4px;">chrome.storage.local</code> API to store the following data <strong>locally on your device only</strong>:</p>
+    <ul>
+      <li><strong>Settings & preferences:</strong> Which sins are enabled, warning frequency, custom emojis, theme choices</li>
+      <li><strong>Time tracking data (Premium):</strong> Aggregated time spent per category per day (e.g., "Greed: 15 minutes"). No specific URLs or page titles are stored.</li>
+      <li><strong>Virtue tokens (Premium):</strong> Token count and a log of which category earned each token</li>
+      <li><strong>License key (Premium):</strong> Your premium activation key</li>
+      <li><strong>Whitelist (Premium):</strong> Domains you've chosen to exempt from warnings</li>
+    </ul>
+    <p>This data never leaves your browser. It is not transmitted to us or any third party.</p>
+
+    <h2>4. Permissions Explained</h2>
+    <p>The Extension requests the following Chrome permissions:</p>
+    <ul>
+      <li><strong>"storage":</strong> Used to save your settings and tracking data locally on your device.</li>
+      <li><strong>"tabs":</strong> Used to detect which website you're currently viewing so the Extension can show relevant sin or virtue messages. The URL is checked against a list of known patterns (e.g., "amazon" → Greed). <strong>URLs are never stored, logged, or transmitted.</strong></li>
+    </ul>
+
+    <h2>5. Content Scripts</h2>
+    <p>The Extension injects a content script on web pages to display banner messages. This script:</p>
+    <ul>
+      <li>Reads the current page URL to match against known site patterns</li>
+      <li>Scans a small portion of page text to detect shopping/streaming keywords</li>
+      <li>Displays a banner with a relevant message</li>
+      <li>Does <strong>not</strong> modify any page content beyond adding the banner</li>
+      <li>Does <strong>not</strong> read passwords, form data, or personal information</li>
+      <li>Does <strong>not</strong> inject ads or tracking scripts</li>
+    </ul>
+
+    <h2>6. Third-Party Services</h2>
+    <p>The Extension does not integrate with any third-party analytics, advertising, or tracking services. The optional "Share on Facebook" feature (Premium) simply opens a Facebook share dialog with pre-filled text — no data is sent to Facebook by the Extension itself.</p>
+
+    <h2>7. Data Sharing</h2>
+    <p>We do not sell, trade, rent, or share any user data with anyone. There is no data to share because we don't collect any.</p>
+
+    <h2>8. Children's Privacy</h2>
+    <p>The Extension is safe for users of all ages. It does not collect personal information from anyone, including children under 13. The content is family-friendly and educational.</p>
+
+    <h2>9. Data Deletion</h2>
+    <p>Since all data is stored locally on your device:</p>
+    <ul>
+      <li>Uninstalling the Extension automatically deletes all stored data</li>
+      <li>You can clear Extension data at any time through Chrome's settings (chrome://extensions → 7 WebLY Sins → Details → Clear data)</li>
+    </ul>
+
+    <h2>10. Updates to This Policy</h2>
+    <p>If we ever change this policy, we will update the "Last updated" date above. Any significant changes will be communicated through the Extension's update notes.</p>
+
+    <h2>11. Contact</h2>
+    <p>If you have questions about this privacy policy, please contact us at:</p>
+    <p><strong>Email:</strong> support@7weblysins.com</p>
+
+    <div class="highlight" style="margin-top: 36px;">
+      <p><strong>TL;DR:</strong> Your data is yours. It stays on your device. We never see it, touch it, or send it anywhere. Browse in peace. 😇</p>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 The 7 WebLY Sins. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 380px;
+      max-height: 580px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #1a1a2e;
+      color: #eee;
+      overflow-y: auto;
+    }
+
+    /* --- Tabs --- */
+    .tab-bar {
+      display: flex;
+      background: rgba(0,0,0,0.3);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .tab {
+      flex: 1;
+      padding: 12px 8px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: #888;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    .tab.active {
+      color: #4fc3f7;
+      border-bottom-color: #4fc3f7;
+    }
+
+    .tab-content { display: none; padding: 16px; }
+    .tab-content.active { display: block; }
+
+    /* --- Header --- */
+    .header {
+      text-align: center;
+      padding: 14px 16px 8px;
+    }
+    .header h1 { font-size: 18px; margin-bottom: 4px; }
+    .header .subtitle { font-size: 11px; color: #888; }
+
+    /* --- Sin Score --- */
+    .score-section { text-align: center; margin: 14px 0; }
+    .score-circle {
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center; justify-content: center;
+      flex-direction: column;
+      border: 4px solid #4fc3f7;
+      margin-bottom: 8px;
+    }
+    .score-number { font-size: 32px; font-weight: 800; color: #4fc3f7; }
+    .score-label { font-size: 10px; color: #aaa; text-transform: uppercase; letter-spacing: 1px; }
+    .score-grade { font-size: 14px; font-weight: 600; margin-top: 4px; }
+
+    /* --- Time Bars --- */
+    .time-section h3 {
+      font-size: 13px; color: #aaa;
+      text-transform: uppercase; letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+    .time-row {
+      display: flex; align-items: center;
+      margin-bottom: 8px; gap: 10px;
+    }
+    .time-emoji { font-size: 20px; width: 28px; text-align: center; }
+    .time-info { flex: 1; }
+    .time-name { font-size: 13px; font-weight: 600; }
+    .time-bar-bg {
+      height: 8px; background: rgba(255,255,255,0.08);
+      border-radius: 4px; margin-top: 3px; overflow: hidden;
+    }
+    .time-bar-fill { height: 100%; border-radius: 4px; transition: width 0.5s ease; }
+    .time-duration { font-size: 12px; color: #aaa; min-width: 55px; text-align: right; }
+
+    .virtue-row .time-bar-fill { background: linear-gradient(90deg, #66bb6a, #43a047); }
+    .sin-row .time-bar-fill { background: linear-gradient(90deg, #ef5350, #c62828); }
+
+    .divider { height: 1px; background: rgba(255,255,255,0.08); margin: 14px 0; }
+
+    .total-row {
+      display: flex; justify-content: space-between;
+      font-size: 13px; color: #aaa;
+    }
+    .total-row span:last-child { font-weight: 600; color: #eee; }
+
+    /* --- Week Chart --- */
+    .week-chart {
+      display: flex; justify-content: space-between;
+      align-items: flex-end; height: 80px;
+      padding: 0 4px; margin: 10px 0;
+    }
+    .week-day { display: flex; flex-direction: column; align-items: center; flex: 1; gap: 2px; }
+    .week-bars { display: flex; gap: 2px; align-items: flex-end; height: 60px; }
+    .week-bar { width: 14px; border-radius: 3px 3px 0 0; min-height: 3px; }
+    .week-bar.sin-bar { background: linear-gradient(0deg, #ef5350, #ff7043); }
+    .week-bar.virtue-bar { background: linear-gradient(0deg, #66bb6a, #81c784); }
+    .week-label { font-size: 10px; color: #888; }
+
+    /* --- Sin Cards --- */
+    .sin-card {
+      display: flex; align-items: center;
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px; padding: 10px 12px;
+      margin-bottom: 8px; border-left: 3px solid #444;
+    }
+    .sin-card .emoji { font-size: 24px; margin-right: 12px; }
+    .sin-card div:nth-child(2) { flex: 1; }
+    .sin-card .name { font-weight: 700; font-size: 14px; }
+    .sin-card .virtue { font-size: 11px; color: #888; margin-top: 2px; }
+    .sin-card[data-sin="pride"]    { border-left-color: #e1bee7; }
+    .sin-card[data-sin="greed"]    { border-left-color: #fff176; }
+    .sin-card[data-sin="lust"]     { border-left-color: #ef9a9a; }
+    .sin-card[data-sin="envy"]     { border-left-color: #a5d6a7; }
+    .sin-card[data-sin="gluttony"] { border-left-color: #ffcc80; }
+    .sin-card[data-sin="wrath"]    { border-left-color: #e57373; }
+    .sin-card[data-sin="sloth"]    { border-left-color: #90caf9; }
+
+    /* --- Settings --- */
+    .setting-group { margin-bottom: 16px; }
+    .setting-group h3 {
+      font-size: 13px; color: #aaa;
+      text-transform: uppercase; letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    .setting-row {
+      display: flex; align-items: center;
+      justify-content: space-between; padding: 7px 0;
+    }
+    .setting-row label { font-size: 14px; display: flex; align-items: center; gap: 8px; }
+    .toggle-switch { position: relative; width: 42px; height: 24px; flex-shrink: 0; }
+    .toggle-switch input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute; inset: 0; background: #444;
+      border-radius: 24px; cursor: pointer; transition: 0.3s;
+    }
+    .slider::before {
+      content: ''; position: absolute;
+      width: 18px; height: 18px; left: 3px; bottom: 3px;
+      background: #fff; border-radius: 50%; transition: 0.3s;
+    }
+    .toggle-switch input:checked + .slider { background: #4fc3f7; }
+    .toggle-switch input:checked + .slider::before { transform: translateX(18px); }
+
+    /* --- Emoji Picker --- */
+    .emoji-picker-row {
+      display: flex; align-items: center; padding: 6px 0; gap: 8px;
+    }
+    .emoji-picker-row label { font-size: 14px; flex: 1; display: flex; align-items: center; gap: 8px; }
+    .emoji-input {
+      width: 50px; padding: 6px; text-align: center; font-size: 20px;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px; color: #fff; outline: none;
+    }
+    .emoji-input:focus { border-color: #4fc3f7; }
+
+    /* --- Whitelist --- */
+    .whitelist-input-row {
+      display: flex; gap: 8px; margin-bottom: 10px;
+    }
+    .whitelist-input {
+      flex: 1; padding: 8px 10px; font-size: 13px;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px; color: #fff; outline: none;
+    }
+    .whitelist-input::placeholder { color: #666; }
+    .whitelist-input:focus { border-color: #4fc3f7; }
+    .btn-add-site {
+      background: #4fc3f7; color: #1a1a2e; border: none;
+      padding: 8px 14px; border-radius: 8px; font-size: 13px;
+      font-weight: 700; cursor: pointer; white-space: nowrap;
+    }
+    .whitelist-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 6px 10px; margin-bottom: 4px;
+      background: rgba(255,255,255,0.05); border-radius: 6px;
+    }
+    .whitelist-item span { font-size: 13px; color: #ccc; }
+    .btn-remove-site {
+      background: none; border: none; color: #ef5350;
+      font-size: 16px; cursor: pointer; padding: 0 4px;
+    }
+
+    /* --- Premium Banner --- */
+    .premium-banner {
+      background: linear-gradient(135deg, #1a237e, #4a148c);
+      border-radius: 12px; padding: 14px;
+      text-align: center; margin-bottom: 14px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .premium-banner h3 { font-size: 15px; margin-bottom: 6px; color: #fff; }
+    .premium-banner p { font-size: 12px; color: #bbb; margin-bottom: 10px; }
+    .btn-premium {
+      background: linear-gradient(135deg, #ffd54f, #ff6f00);
+      color: #1a1a2e; border: none; padding: 10px 24px;
+      border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer;
+    }
+    .license-input-row {
+      display: flex; gap: 6px; margin-top: 10px; justify-content: center;
+    }
+    .license-input {
+      width: 200px; padding: 8px 10px; font-size: 13px; font-family: monospace;
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 6px; color: #fff; text-align: center; letter-spacing: 1px;
+      outline: none;
+    }
+    .license-input::placeholder { color: #555; letter-spacing: 0; font-family: -apple-system, sans-serif; }
+    .license-input:focus { border-color: #ffd54f; }
+    .btn-activate {
+      background: linear-gradient(135deg, #ffd54f, #ff6f00);
+      color: #1a1a2e; border: none; padding: 8px 14px;
+      border-radius: 6px; font-size: 12px; font-weight: 700; cursor: pointer;
+    }
+    .license-error { font-size: 11px; color: #ef5350; margin-top: 6px; display: none; }
+    .license-success { font-size: 11px; color: #66bb6a; margin-top: 6px; display: none; }
+    }
+    .premium-banner h3 { font-size: 15px; margin-bottom: 6px; color: #fff; }
+    .premium-banner p { font-size: 12px; color: #bbb; margin-bottom: 10px; }
+    .btn-premium {
+      background: linear-gradient(135deg, #ffd54f, #ff6f00);
+      color: #1a1a2e; border: none; padding: 10px 24px;
+      border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer;
+    }
+
+    .premium-badge {
+      display: inline-block; font-size: 9px;
+      background: linear-gradient(135deg, #ffd54f, #ff6f00);
+      color: #1a1a2e; padding: 2px 6px; border-radius: 4px;
+      font-weight: 700; margin-left: 6px; vertical-align: middle;
+    }
+
+    .premium-locked {
+      opacity: 0.45;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .btn-manage-sub {
+      background: rgba(255,255,255,0.08);
+      color: #aaa; border: 1px solid rgba(255,255,255,0.15);
+      padding: 10px 24px; border-radius: 8px;
+      font-size: 13px; font-weight: 600; cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-manage-sub:hover { background: rgba(255,255,255,0.12); color: #fff; }
+
+    .no-data { text-align: center; padding: 24px 16px; color: #666; font-size: 14px; }
+
+    /* --- Virtue Tokens --- */
+    .token-summary {
+      text-align: center; padding: 12px 0;
+    }
+    .token-total {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+    .token-coin { font-size: 36px; }
+    .token-count {
+      font-size: 40px; font-weight: 800;
+      background: linear-gradient(135deg, #ffd54f, #ff6f00);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .token-subtitle { font-size: 11px; color: #666; margin-top: 4px; }
+    .token-log-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 6px 10px; margin-bottom: 3px;
+      background: rgba(255,255,255,0.04); border-radius: 6px;
+    }
+    .token-log-left { display: flex; align-items: center; gap: 8px; }
+    .token-log-site { font-size: 13px; color: #ccc; }
+    .token-log-virtue { font-size: 11px; color: #4fc3f7; }
+    .token-log-time { font-size: 11px; color: #555; }
+    .token-log-more {
+      text-align: center; font-size: 12px; color: #666;
+      padding: 6px; cursor: pointer;
+    }
+    .token-log-more:hover { color: #4fc3f7; }
+    .btn-share {
+      display: block; width: 100%; margin-top: 10px; padding: 10px;
+      background: #1877f2; color: #fff; border: none;
+      border-radius: 8px; font-size: 13px; font-weight: 700;
+      cursor: pointer; text-align: center;
+    }
+    .btn-share:hover { background: #166fe5; }
+
+    /* --- Token Icon Picker --- */
+    .token-icon-grid {
+      display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px;
+    }
+    .token-icon-option {
+      width: 40px; height: 40px; display: flex; align-items: center;
+      justify-content: center; font-size: 22px; border-radius: 8px;
+      background: rgba(255,255,255,0.06); border: 2px solid transparent;
+      cursor: pointer; transition: 0.2s;
+    }
+    .token-icon-option:hover { background: rgba(255,255,255,0.12); }
+    .token-icon-option.selected {
+      border-color: #ffd54f; background: rgba(255,213,79,0.15);
+    }
+
+    .footer { text-align: center; padding: 12px; font-size: 11px; color: #444; }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>⚠️ The 7 WebLY Sins</h1>
+    <p class="subtitle">Watching over your browsing</p>
+  </div>
+
+  <div class="tab-bar">
+    <div class="tab active" data-tab="dashboard">📊 Dashboard</div>
+    <div class="tab" data-tab="sins">📜 My WebLY Sins</div>
+    <div class="tab" data-tab="settings">⚙️ Settings</div>
+  </div>
+
+  <!-- ============ DASHBOARD TAB ============ -->
+  <div id="tab-dashboard" class="tab-content active">
+    <div id="premium-gate" class="premium-banner" style="display:none;">
+      <h3>🔓 Unlock Premium</h3>
+      <p>Get time tracking, sin scores, weekly reports, rotating emojis, and custom emojis!</p>
+      <button class="btn-premium" id="btn-unlock">Get Premium</button>
+      <div class="license-success" id="premium-status-message" style="display:none; margin-top:8px;">Checking payment status...</div>
+    </div>
+
+    <div id="dashboard-content">
+      <div class="score-section">
+        <div class="score-circle" id="score-circle">
+          <div class="score-number" id="sin-score">--</div>
+          <div class="score-label">Score</div>
+        </div>
+        <div class="score-grade" id="score-grade"></div>
+      </div>
+
+      <div class="time-section">
+        <h3>😇 Virtuous Time Today</h3>
+        <div class="time-row virtue-row">
+          <span class="time-emoji">😇</span>
+          <div class="time-info">
+            <div class="time-name">Productive Sites</div>
+            <div class="time-bar-bg"><div class="time-bar-fill" id="virtue-bar" style="width:0%"></div></div>
+          </div>
+          <span class="time-duration" id="virtue-duration">0m</span>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="time-section">
+        <h3>⚠️ Sin Time Today</h3>
+        <div id="sin-time-list"></div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="total-row">
+        <span>Total Tracked Today</span>
+        <span id="total-time">0m</span>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="time-section">
+        <h3>📅 This Week</h3>
+        <div class="week-chart" id="week-chart"></div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- VIRTUE TOKENS -->
+      <div class="time-section">
+        <h3><span id="token-header-icon">🏅</span> Virtue Tokens</h3>
+        <div class="token-summary">
+          <div class="token-total">
+            <span class="token-coin" id="token-display-icon">🏅</span>
+            <span class="token-count" id="token-count">0</span>
+          </div>
+          <p class="token-subtitle">Earn 1 token for every 5 min on virtuous sites</p>
+        </div>
+        <div id="token-log"></div>
+        <button class="btn-share" id="btn-share-tokens" style="display:none;">📤 Share on Facebook</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SINS TAB ============ -->
+  <div id="tab-sins" class="tab-content">
+    <p style="font-size:13px; color:#aaa; text-align:center; margin-bottom:12px;">Choose Your Sins To Monitor</p>
+    <div id="sins-premium-notice" style="display:none;">
+      <p style="font-size:12px; color:#bbb; margin-bottom:14px; text-align:center;">🔒 Choose which sins to monitor with <a href="#" id="premium-link-sins" style="color:#ffd54f; font-weight:700; text-decoration:underline; cursor:pointer;">Premium</a></p>
+    </div>
+    <div class="sin-card" data-sin="pride">
+      <span class="emoji">👑</span>
+      <div><div class="name">Pride</div><div class="virtue">Counter with: Humility</div></div>
+      <div class="toggle-switch"><input type="checkbox" class="sin-toggle" data-sin="pride" checked><span class="slider"></span></div>
+    </div>
+    <div class="sin-card" data-sin="greed">
+      <span class="emoji">💰</span>
+      <div><div class="name">Greed</div><div class="virtue">Counter with: Generosity</div></div>
+      <div class="toggle-switch"><input type="checkbox" class="sin-toggle" data-sin="greed" checked><span class="slider"></span></div>
+    </div>
+    <div class="sin-card" data-sin="lust">
+      <span class="emoji">🔥</span>
+      <div><div class="name">Lust</div><div class="virtue">Counter with: Chastity</div></div>
+      <div class="toggle-switch"><input type="checkbox" class="sin-toggle" data-sin="lust" checked><span class="slider"></span></div>
+    </div>
+    <div class="sin-card" data-sin="envy">
+      <span class="emoji">💚</span>
+      <div><div class="name">Envy</div><div class="virtue">Counter with: Kindness</div></div>
+      <div class="toggle-switch"><input type="checkbox" class="sin-toggle" data-sin="envy" checked><span class="slider"></span></div>
+    </div>
+    <div class="sin-card" data-sin="gluttony">
+      <span class="emoji">🍔</span>
+      <div><div class="name">Gluttony</div><div class="virtue">Counter with: Temperance</div></div>
+      <div class="toggle-switch"><input type="checkbox" class="sin-toggle" data-sin="gluttony" checked><span class="slider"></span></div>
+    </div>
+    <div class="sin-card" data-sin="wrath">
+      <span class="emoji">😡</span>
+      <div><div class="name">Wrath</div><div class="virtue">Counter with: Patience</div></div>
+      <div class="toggle-switch"><input type="checkbox" class="sin-toggle" data-sin="wrath" checked><span class="slider"></span></div>
+    </div>
+    <div class="sin-card" data-sin="sloth">
+      <span class="emoji">🦥</span>
+      <div><div class="name">Sloth</div><div class="virtue">Counter with: Diligence</div></div>
+      <div class="toggle-switch"><input type="checkbox" class="sin-toggle" data-sin="sloth" checked><span class="slider"></span></div>
+    </div>
+  </div>
+
+  <!-- ============ SETTINGS TAB ============ -->
+  <div id="tab-settings" class="tab-content">
+
+    <div class="setting-group">
+      <h3>General</h3>
+      <div class="setting-row">
+        <label>Show warnings on pages</label>
+        <div class="toggle-switch">
+          <input type="checkbox" id="toggle-enabled" checked>
+          <span class="slider"></span>
+        </div>
+      </div>
+    </div>
+
+    <div id="premium-banner-style-section" class="setting-group">
+      <h3>Banner Style <span class="premium-badge">PRO</span></h3>
+      <p style="font-size:11px; color:#666; margin-bottom:10px;">Choose how your sin & virtue banners look.</p>
+      <div id="banner-style-options" style="display:flex; flex-direction:column; gap:8px;">
+        <label class="banner-style-option" style="display:flex; align-items:center; gap:10px; padding:10px 12px; background:rgba(255,255,255,0.05); border-radius:10px; cursor:pointer; border:2px solid transparent; transition:border-color 0.2s;">
+          <input type="radio" name="bannerStyle" value="default" checked style="display:none;">
+          <span style="font-size:22px;">🎨</span>
+          <div>
+            <div style="font-size:14px; font-weight:600;">Default</div>
+            <div style="font-size:11px; color:#888;">Classic look with colored background</div>
+          </div>
+        </label>
+        <label class="banner-style-option" style="display:flex; align-items:center; gap:10px; padding:10px 12px; background:rgba(255,255,255,0.05); border-radius:10px; cursor:pointer; border:2px solid transparent; transition:border-color 0.2s;">
+          <input type="radio" name="bannerStyle" value="scroll" style="display:none;">
+          <span style="font-size:22px;">📜</span>
+          <div>
+            <div style="font-size:14px; font-weight:600;">Scroll</div>
+            <div style="font-size:11px; color:#888;">Ancient parchment with scroll bars</div>
+          </div>
+        </label>
+        <label class="banner-style-option" style="display:flex; align-items:center; gap:10px; padding:10px 12px; background:rgba(255,255,255,0.05); border-radius:10px; cursor:pointer; border:2px solid transparent; transition:border-color 0.2s;">
+          <input type="radio" name="bannerStyle" value="video" style="display:none;">
+          <span style="font-size:22px;">📺</span>
+          <div>
+            <div style="font-size:14px; font-weight:600;">Video Screen</div>
+            <div style="font-size:11px; color:#888;">Retro CRT monitor with scanlines</div>
+          </div>
+        </label>
+        <label class="banner-style-option" style="display:flex; align-items:center; gap:10px; padding:10px 12px; background:rgba(255,255,255,0.05); border-radius:10px; cursor:pointer; border:2px solid transparent; transition:border-color 0.2s;">
+          <input type="radio" name="bannerStyle" value="neon" style="display:none;">
+          <span style="font-size:22px;">💡</span>
+          <div>
+            <div style="font-size:14px; font-weight:600;">Neon Light</div>
+            <div style="font-size:11px; color:#888;">Glowing neon outline, black center</div>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <div id="video-color-section" class="setting-group" style="display:none;">
+      <h3>📺 Video Screen Sin Text Color</h3>
+      <p style="font-size:11px; color:#666; margin-bottom:10px;">Choose the text color for sin warning banners.</p>
+      <div id="video-color-options" style="display:flex; gap:8px; flex-wrap:wrap;">
+        <div class="color-option video-text-color" data-color="#00ff41" style="width:40px; height:40px; border-radius:8px; background:#00ff41; cursor:pointer; border:2px solid transparent;" title="Green (default)"></div>
+        <div class="color-option video-text-color" data-color="#ff4136" style="width:40px; height:40px; border-radius:8px; background:#ff4136; cursor:pointer; border:2px solid transparent;" title="Red"></div>
+        <div class="color-option video-text-color" data-color="#00bfff" style="width:40px; height:40px; border-radius:8px; background:#00bfff; cursor:pointer; border:2px solid transparent;" title="Cyan"></div>
+        <div class="color-option video-text-color" data-color="#ffd54f" style="width:40px; height:40px; border-radius:8px; background:#ffd54f; cursor:pointer; border:2px solid transparent;" title="Amber"></div>
+        <div class="color-option video-text-color" data-color="#ff6fff" style="width:40px; height:40px; border-radius:8px; background:#ff6fff; cursor:pointer; border:2px solid transparent;" title="Pink"></div>
+        <div class="color-option video-text-color" data-color="#ffffff" style="width:40px; height:40px; border-radius:8px; background:#ffffff; cursor:pointer; border:2px solid transparent;" title="White"></div>
+      </div>
+      <label style="font-size:13px; font-weight:600; margin-top:14px; margin-bottom:6px; display:block;">😇 VIRTUE TEXT COLOR</label>
+      <p style="font-size:11px; color:#666; margin-bottom:10px;">Choose the text color for virtue praise banners.</p>
+      <div id="video-virtue-color-options" style="display:flex; gap:8px; flex-wrap:wrap;">
+        <div class="color-option video-virtue-color" data-color="#00ff41" style="width:40px; height:40px; border-radius:8px; background:#00ff41; cursor:pointer; border:2px solid transparent;" title="Green (default)"></div>
+        <div class="color-option video-virtue-color" data-color="#00bfff" style="width:40px; height:40px; border-radius:8px; background:#00bfff; cursor:pointer; border:2px solid transparent;" title="Cyan"></div>
+        <div class="color-option video-virtue-color" data-color="#ffd54f" style="width:40px; height:40px; border-radius:8px; background:#ffd54f; cursor:pointer; border:2px solid transparent;" title="Amber"></div>
+        <div class="color-option video-virtue-color" data-color="#ff6fff" style="width:40px; height:40px; border-radius:8px; background:#ff6fff; cursor:pointer; border:2px solid transparent;" title="Pink"></div>
+        <div class="color-option video-virtue-color" data-color="#ffffff" style="width:40px; height:40px; border-radius:8px; background:#ffffff; cursor:pointer; border:2px solid transparent;" title="White"></div>
+        <div class="color-option video-virtue-color" data-color="#66bb6a" style="width:40px; height:40px; border-radius:8px; background:#66bb6a; cursor:pointer; border:2px solid transparent;" title="Soft Green"></div>
+      </div>
+    </div>
+
+    <div id="neon-color-section" class="setting-group" style="display:none;">
+      <h3>💡 Neon Sin Edge Color</h3>
+      <p style="font-size:11px; color:#666; margin-bottom:10px;">Choose the glow color for sin warning banners.</p>
+      <div id="neon-color-options" style="display:flex; gap:8px; flex-wrap:wrap;">
+        <div class="color-option neon-edge-color" data-color="#ff3333" style="width:40px; height:40px; border-radius:8px; background:#ff3333; cursor:pointer; border:2px solid transparent;" title="Red"></div>
+        <div class="color-option neon-edge-color" data-color="#33ff66" style="width:40px; height:40px; border-radius:8px; background:#33ff66; cursor:pointer; border:2px solid transparent;" title="Green"></div>
+        <div class="color-option neon-edge-color" data-color="#3399ff" style="width:40px; height:40px; border-radius:8px; background:#3399ff; cursor:pointer; border:2px solid transparent;" title="Blue"></div>
+        <div class="color-option neon-edge-color" data-color="#ff66ff" style="width:40px; height:40px; border-radius:8px; background:#ff66ff; cursor:pointer; border:2px solid transparent;" title="Pink"></div>
+        <div class="color-option neon-edge-color" data-color="#ffd54f" style="width:40px; height:40px; border-radius:8px; background:#ffd54f; cursor:pointer; border:2px solid transparent;" title="Gold"></div>
+        <div class="color-option neon-edge-color" data-color="#00ffff" style="width:40px; height:40px; border-radius:8px; background:#00ffff; cursor:pointer; border:2px solid transparent;" title="Cyan"></div>
+        <div class="color-option neon-edge-color" data-color="#ff6600" style="width:40px; height:40px; border-radius:8px; background:#ff6600; cursor:pointer; border:2px solid transparent;" title="Orange"></div>
+        <div class="color-option neon-edge-color" data-color="#ffffff" style="width:40px; height:40px; border-radius:8px; background:#ffffff; cursor:pointer; border:2px solid transparent;" title="White"></div>
+      </div>
+      <label style="font-size:13px; font-weight:600; margin-top:14px; margin-bottom:6px; display:block;">😇 VIRTUE NEON OUTLINE COLOR</label>
+      <p style="font-size:11px; color:#666; margin-bottom:10px;">Choose the glow color for virtue praise banners.</p>
+      <div id="neon-virtue-color-options" style="display:flex; gap:8px; flex-wrap:wrap;">
+        <div class="color-option neon-virtue-color" data-color="#33ff66" style="width:40px; height:40px; border-radius:8px; background:#33ff66; cursor:pointer; border:2px solid transparent;" title="Green (default)"></div>
+        <div class="color-option neon-virtue-color" data-color="#3399ff" style="width:40px; height:40px; border-radius:8px; background:#3399ff; cursor:pointer; border:2px solid transparent;" title="Blue"></div>
+        <div class="color-option neon-virtue-color" data-color="#ffd54f" style="width:40px; height:40px; border-radius:8px; background:#ffd54f; cursor:pointer; border:2px solid transparent;" title="Gold"></div>
+        <div class="color-option neon-virtue-color" data-color="#00ffff" style="width:40px; height:40px; border-radius:8px; background:#00ffff; cursor:pointer; border:2px solid transparent;" title="Cyan"></div>
+        <div class="color-option neon-virtue-color" data-color="#ff66ff" style="width:40px; height:40px; border-radius:8px; background:#ff66ff; cursor:pointer; border:2px solid transparent;" title="Pink"></div>
+        <div class="color-option neon-virtue-color" data-color="#ffffff" style="width:40px; height:40px; border-radius:8px; background:#ffffff; cursor:pointer; border:2px solid transparent;" title="White"></div>
+        <div class="color-option neon-virtue-color" data-color="#ff6600" style="width:40px; height:40px; border-radius:8px; background:#ff6600; cursor:pointer; border:2px solid transparent;" title="Orange"></div>
+        <div class="color-option neon-virtue-color" data-color="#ff3333" style="width:40px; height:40px; border-radius:8px; background:#ff3333; cursor:pointer; border:2px solid transparent;" title="Red"></div>
+      </div>
+    </div>
+
+    <div id="premium-colors-section" class="setting-group">
+      <h3>Banner Colors</h3>
+      <p style="font-size:11px; color:#666; margin-bottom:10px;">Choose colors for warning and praise banners.</p>
+
+      <label style="font-size:13px; font-weight:600; margin-bottom:6px; display:block;">⚠️ WARNING COLOR</label>
+      <div id="warning-color-options" style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px;">
+        <div class="color-option warning-color" data-color="rgba(200, 35, 25, 0.95)" style="width:40px; height:40px; border-radius:8px; background:rgba(200,35,25,0.95); cursor:pointer; border:2px solid transparent;"></div>
+        <div class="color-option warning-color" data-color="rgba(180, 60, 0, 0.95)" style="width:40px; height:40px; border-radius:8px; background:rgba(180,60,0,0.95); cursor:pointer; border:2px solid transparent;"></div>
+        <div class="color-option warning-color" data-color="rgba(140, 20, 60, 0.95)" style="width:40px; height:40px; border-radius:8px; background:rgba(140,20,60,0.95); cursor:pointer; border:2px solid transparent;"></div>
+        <div class="color-option warning-color" data-color="rgba(100, 0, 0, 0.95)" style="width:40px; height:40px; border-radius:8px; background:rgba(100,0,0,0.95); cursor:pointer; border:2px solid transparent;"></div>
+        <div class="color-option warning-color" data-color="rgba(60, 20, 80, 0.95)" style="width:40px; height:40px; border-radius:8px; background:rgba(60,20,80,0.95); cursor:pointer; border:2px solid transparent;"></div>
+        <div class="color-option warning-color" data-color="rgba(30, 30, 30, 0.95)" style="width:40px; height:40px; border-radius:8px; background:rgba(30,30,30,0.95); cursor:pointer; border:2px solid transparent;"></div>
+      </div>
+
+      <label style="font-size:13px; font-weight:600; margin-bottom:6px; display:block;">😇 VIRTUE PRAISE COLOR</label>
+      <div id="praise-color-options" style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px;">
+        <div class="color-option praise-color" data-color="rgba(50, 80, 55, 0.95)" style="width:40px; height:40px; border-radius:8px; background:rgba(50,80,55,0.95); cursor:pointer; border:2px solid transparent;"></div>
+        <div class="color-option praise-color" data-color="rgba(20, 100, 60, 0.95)" style="width:40px; height:40px; border-radius:8px; background:rgba(20,100,60,0.95); cursor:pointer; border:2px solid transparent;"></div>
+        <div class="color-option praise-color" data-color="rgba(0, 80, 120, 0.95)" style="width:40px; height:40px; border-radius:8px; background:rgba(0,80,120,0.95); cursor:pointer; border:2px solid transparent;"></div>
+        <div class="color-option praise-color" data-color="rgba(25, 50, 100, 0.95)" style="width:40px; height:40px; border-radius:8px; background:rgba(25,50,100,0.95); cursor:pointer; border:2px solid transparent;"></div>
+        <div class="color-option praise-color" data-color="rgba(80, 60, 120, 0.95)" style="width:40px; height:40px; border-radius:8px; background:rgba(80,60,120,0.95); cursor:pointer; border:2px solid transparent;"></div>
+        <div class="color-option praise-color" data-color="rgba(30, 30, 30, 0.95)" style="width:40px; height:40px; border-radius:8px; background:rgba(30,30,30,0.95); cursor:pointer; border:2px solid transparent;"></div>
+      </div>
+    </div>
+
+    <div id="premium-font-section" class="setting-group">
+      <h3>Message Font</h3>
+      <p style="font-size:11px; color:#666; margin-bottom:8px;">Choose a font for sin & virtue banner messages.</p>
+      <select id="font-select" style="
+        width:100%; padding:10px 12px; font-size:14px;
+        background:rgba(255,255,255,0.08); color:#eee;
+        border:1px solid rgba(255,255,255,0.15); border-radius:8px; outline:none;
+        cursor:pointer;
+      ">
+        <option value="default" style="font-family:-apple-system,sans-serif">System Default</option>
+        <option value="Georgia, serif" style="font-family:Georgia,serif">Georgia</option>
+        <option value="'Courier New', monospace" style="font-family:'Courier New',monospace">Courier New</option>
+        <option value="'Times New Roman', serif" style="font-family:'Times New Roman',serif">Times New Roman</option>
+        <option value="Verdana, sans-serif" style="font-family:Verdana,sans-serif">Verdana</option>
+        <option value="'Trebuchet MS', sans-serif" style="font-family:'Trebuchet MS',sans-serif">Trebuchet MS</option>
+        <option value="Impact, sans-serif" style="font-family:Impact,sans-serif">Impact</option>
+        <option value="'Comic Sans MS', cursive" style="font-family:'Comic Sans MS',cursive">Comic Sans MS</option>
+      </select>
+      <div id="font-preview" style="
+        margin-top:10px; padding:12px; border-radius:8px;
+        background:rgba(200,35,25,0.6); font-size:14px; color:#ddd; line-height:1.5;
+      ">Preview: This looks like a fun store with lots of cool stuff!</div>
+    </div>
+
+    <div id="premium-flash-section" class="setting-group">
+      <h3>Flashing Banner</h3>
+      <p style="font-size:11px; color:#666; margin-bottom:8px;">Make banners flash to grab your attention.</p>
+      <div class="setting-row">
+        <label for="toggle-flash">Enable flashing banners</label>
+        <label class="toggle-switch">
+          <input type="checkbox" id="toggle-flash">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <div id="premium-emoji-section" class="setting-group">
+      <h3>Custom Emojis</h3>
+      <p style="font-size:11px; color:#666; margin-bottom:8px;">Set your own emoji for each sin. Leave blank for rotating emojis.</p>
+      <div class="emoji-picker-row"><label>Pride</label><input type="text" class="emoji-input" data-sin="pride" maxlength="2" placeholder="👑"></div>
+      <div class="emoji-picker-row"><label>Greed</label><input type="text" class="emoji-input" data-sin="greed" maxlength="2" placeholder="💰"></div>
+      <div class="emoji-picker-row"><label>Lust</label><input type="text" class="emoji-input" data-sin="lust" maxlength="2" placeholder="🔥"></div>
+      <div class="emoji-picker-row"><label>Envy</label><input type="text" class="emoji-input" data-sin="envy" maxlength="2" placeholder="💚"></div>
+      <div class="emoji-picker-row"><label>Gluttony</label><input type="text" class="emoji-input" data-sin="gluttony" maxlength="2" placeholder="🍔"></div>
+      <div class="emoji-picker-row"><label>Wrath</label><input type="text" class="emoji-input" data-sin="wrath" maxlength="2" placeholder="😡"></div>
+      <div class="emoji-picker-row"><label>Sloth</label><input type="text" class="emoji-input" data-sin="sloth" maxlength="2" placeholder="🦥"></div>
+    </div>
+
+    <div id="premium-token-icon-section" class="setting-group">
+      <h3>Virtue Token Icon</h3>
+      <p style="font-size:11px; color:#666; margin-bottom:8px;">Choose the icon that represents your virtue tokens.</p>
+      <div class="token-icon-grid" id="token-icon-grid"></div>
+    </div>
+
+    <div id="premium-whitelist-section" class="setting-group">
+      <h3>Exempt Websites</h3>
+      <p style="font-size:11px; color:#666; margin-bottom:8px;">Sites listed here won't trigger sin warnings. Enter the domain (e.g. amazon.com).</p>
+      <div class="whitelist-input-row">
+        <input type="text" id="whitelist-input" class="whitelist-input" placeholder="e.g. amazon.com">
+        <button class="btn-add-site" id="btn-add-site">+ Add</button>
+      </div>
+      <div id="whitelist-list"></div>
+    </div>
+  </div>
+
+  <!-- Premium / Manage Subscription -->
+  <div id="premium-action-section" style="text-align:center; padding:8px 16px 4px;">
+    <button class="btn-manage-sub" id="btn-manage-sub" style="display:none; width:100%;">⚙️ Manage Subscription</button>
+  </div>
+
+  <p class="footer">Stay vigilant. Stay virtuous.</p>
+
+  <script src="ExtPay.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

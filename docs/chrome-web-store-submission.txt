@@ -1,0 +1,199 @@
+============================================================
+CHROME WEB STORE SUBMISSION — 7 WebLY Sins
+Copy/paste each section into the corresponding field
+============================================================
+
+
+------------------------------------------------------------
+ITEM NAME
+------------------------------------------------------------
+7 WebLY Sins
+
+
+------------------------------------------------------------
+SHORT DESCRIPTION (132 characters max)
+------------------------------------------------------------
+A fun, gentle reminder to avoid the 7 deadly sins while browsing. Warns you about bad habits and praises productive ones!
+
+
+------------------------------------------------------------
+DETAILED DESCRIPTION
+------------------------------------------------------------
+**The Internet Can Be Very Tempting.**
+
+The 7 WebLY Sins is a fun Chrome extension that watches your browsing and gently reminds you when you might be falling into one of the 7 deadly sins — Greed, Gluttony, Envy, Pride, Sloth, Wrath, or Lust.
+
+Shopping too much? That's Greed. 🛒💰
+Ordering food AGAIN? That's Gluttony. 🍔
+Endlessly scrolling social media? That's Envy. 📱💚
+Binge-watching instead of being productive? That's Sloth. 🦥
+
+But it's not all warnings! Visit productive sites like email, learning platforms, fitness apps, or charity sites — and you get praised with fun Virtue messages. 😇
+
+**How It Works:**
+• Install it and browse normally — no setup required
+• A gentle banner appears when you're on a "sinful" site
+• Productive and virtuous sites earn you praise
+• Riddles, rhymes, and old-school wisdom keep it lighthearted
+• Works on Google, Bing, DuckDuckGo, Yahoo, Yelp, and any website
+
+**Free Features:**
+✓ Sin detection on all websites and search engines
+✓ Virtue recognition for productive sites
+✓ Fun warnings with riddles, rhymes, and wise sayings
+✓ Default banner style
+✓ Toggle on/off anytime
+
+**Premium Features:**
+✓ Choose which sins to monitor
+✓ Sin Score Dashboard & Weekly Reports
+✓ Earn Virtue Tokens for productive browsing
+✓ Multiple banner styles (Scroll, Video Screen, Neon Light)
+✓ Rotating emojis for each sin
+✓ Custom banner colors, fonts, and flash effects
+✓ Custom virtue token icons
+✓ Warning frequency control per sin
+✓ Exempt specific websites (whitelist)
+✓ Share achievements on Facebook
+
+**Perfect for:**
+• Anyone who wants to be more mindful about their browsing
+• Parents who want to teach kids digital awareness
+• Schools and youth groups looking for character-building tools
+• Faith communities interested in digital virtue
+
+**Privacy First:**
+Everything stays on your device. We never collect, store, or send your browsing data anywhere. Zero tracking, zero analytics, zero servers. The only external service is ExtensionPay for optional premium payment processing via Stripe.
+
+
+------------------------------------------------------------
+CATEGORY
+------------------------------------------------------------
+Productivity
+
+
+------------------------------------------------------------
+LANGUAGE
+------------------------------------------------------------
+English
+
+
+------------------------------------------------------------
+WEBSITE URL
+------------------------------------------------------------
+(Your GitHub Pages URL for the 7WebLySins website)
+
+
+------------------------------------------------------------
+PRIVACY POLICY URL
+------------------------------------------------------------
+(Your GitHub Pages URL)/privacy.html
+
+
+------------------------------------------------------------
+SINGLE PURPOSE DESCRIPTION
+------------------------------------------------------------
+This extension displays gentle reminder banners on web pages to help users be mindful of their browsing habits, categorizing sites by the 7 deadly sins framework and praising productive browsing.
+
+
+------------------------------------------------------------
+PERMISSION JUSTIFICATIONS
+(Chrome Web Store requires justification for each permission)
+------------------------------------------------------------
+
+Permission: "storage"
+Justification: Used to save user preferences (enabled/disabled toggle, banner style, premium status) and aggregated browsing statistics locally on the user's device. No data is transmitted externally.
+
+Permission: "tabs"
+Justification: Used to read the current tab's URL in order to classify the website into a sin or virtue category and display the appropriate banner message. URLs are pattern-matched locally and are never stored, logged, or transmitted to any server.
+
+Host Permission: "https://extensionpay.com/*"
+Justification: Used to communicate with ExtensionPay's service to verify the user's optional premium payment status. Only payment verification requests are sent — no browsing data, URLs, or personal information is transmitted to this service. ExtensionPay processes payments securely through Stripe.
+
+Content Script: "<all_urls>"
+Justification: The extension needs to run on all websites in order to detect whether the current page falls into a sin or virtue category and display a non-intrusive banner message. The content script reads the page URL and a small portion of visible page text to match against predefined keyword patterns. It does not read passwords, form data, or personal information. It does not modify any page content beyond injecting a dismissible banner overlay.
+
+
+------------------------------------------------------------
+ARE YOU USING REMOTE CODE?
+------------------------------------------------------------
+No. All code is bundled within the extension package. No remote code is loaded or executed.
+
+
+------------------------------------------------------------
+DATA USE DISCLOSURES
+(For the Privacy Practices tab)
+------------------------------------------------------------
+
+Does your extension collect or use any of the following data types?
+
+• Personally identifiable information: NO
+• Health information: NO
+• Financial and payment information: NO (payments handled entirely by ExtensionPay/Stripe)
+• Authentication information: NO
+• Personal communications: NO
+• Location: NO
+• Web history: NO (URLs are pattern-matched in real-time and never stored or transmitted)
+• User activity: NO
+• Website content: NO (only scans a small portion of text for keyword matching, never stored or transmitted)
+
+Data use certification:
+✓ I do not sell user data to third parties
+✓ I do not use or transfer user data for purposes unrelated to the extension's core functionality
+✓ I do not use or transfer user data to determine creditworthiness or for lending purposes
+
+
+------------------------------------------------------------
+DISTRIBUTION / VISIBILITY
+------------------------------------------------------------
+Public
+
+
+------------------------------------------------------------
+PRICING
+------------------------------------------------------------
+Free (with optional in-app premium upgrade via ExtensionPay)
+
+
+------------------------------------------------------------
+MATURE CONTENT
+------------------------------------------------------------
+No mature content. The extension is family-friendly and suitable for all ages.
+
+
+------------------------------------------------------------
+SCREENSHOTS NEEDED (1280x800 or 640x400)
+------------------------------------------------------------
+1. Banner warning on a shopping site (e.g., Amazon showing Greed warning)
+2. Virtue praise on a productive site (e.g., GitHub showing virtue message)
+3. The popup dashboard with sin score and time tracking
+4. The settings tab showing banner styles and premium features
+5. The My WebLY Sins tab showing sin toggles
+
+TIP: Use a clean browser window with no other extensions visible.
+Include at least one sin warning and one virtue praise screenshot.
+
+
+------------------------------------------------------------
+PROMOTIONAL IMAGES (OPTIONAL)
+------------------------------------------------------------
+- Small promo tile: 440x280
+- Marquee promo: 1400x560
+
+
+------------------------------------------------------------
+STORE ICON
+------------------------------------------------------------
+128x128 PNG (use icon128.png from the extension)
+
+
+------------------------------------------------------------
+NOTES FOR REVIEWER
+------------------------------------------------------------
+This extension displays educational/motivational banner messages on web pages based on browsing patterns. It categorizes websites using the "7 deadly sins" framework (e.g., shopping sites = Greed, streaming sites = Sloth) and shows encouraging messages on productive sites.
+
+All processing happens locally in the browser. The only external communication is with ExtensionPay (extensionpay.com) for optional premium payment verification.
+
+To test: Visit any shopping site (amazon.com), food delivery site (doordash.com), or streaming site (netflix.com) to see sin warnings. Visit a productive site (github.com, gmail.com) to see virtue praise.
+
+Premium features can be tested by purchasing through the ExtensionPay checkout flow within the extension popup.

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>7 WebLY Sins — Icon Generator</title>
+  <style>
+    body { font-family: -apple-system, sans-serif; background: #1a1a2e; color: #eee; text-align: center; padding: 40px; }
+    h1 { margin-bottom: 8px; }
+    p { color: #888; margin-bottom: 30px; }
+    .icons { display: flex; gap: 40px; justify-content: center; align-items: flex-end; flex-wrap: wrap; }
+    .icon-box { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .icon-box span { font-size: 13px; color: #888; }
+    canvas { border-radius: 12px; }
+    button {
+      background: linear-gradient(135deg, #ffd54f, #ff6f00); color: #1a1a2e;
+      border: none; padding: 8px 20px; border-radius: 8px; font-weight: 700;
+      cursor: pointer; font-size: 13px;
+    }
+    button:hover { opacity: 0.9; }
+    .instructions { margin-top: 40px; text-align: left; max-width: 600px; margin-left: auto; margin-right: auto;
+      background: rgba(255,255,255,0.05); padding: 24px; border-radius: 12px; }
+    .instructions h3 { margin-bottom: 12px; }
+    .instructions ol { color: #bbb; line-height: 1.8; padding-left: 20px; }
+    .instructions code { background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <h1>⚠️ Icon Generator</h1>
+  <p>Click "Download" under each icon to save it. Then place them in your extension folder.</p>
+
+  <div class="icons">
+    <div class="icon-box">
+      <canvas id="icon-16" width="16" height="16"></canvas>
+      <span>16 × 16</span>
+      <button onclick="download(16)">Download</button>
+    </div>
+    <div class="icon-box">
+      <canvas id="icon-48" width="48" height="48"></canvas>
+      <span>48 × 48</span>
+      <button onclick="download(48)">Download</button>
+    </div>
+    <div class="icon-box">
+      <canvas id="icon-128" width="128" height="128"></canvas>
+      <span>128 × 128</span>
+      <button onclick="download(128)">Download</button>
+    </div>
+  </div>
+
+  <div class="instructions">
+    <h3>After downloading:</h3>
+    <ol>
+      <li>Save the 3 PNG files as <code>icon16.png</code>, <code>icon48.png</code>, and <code>icon128.png</code></li>
+      <li>Place them in the root of your extension folder (next to <code>manifest.json</code>)</li>
+      <li>They're already referenced in your updated <code>manifest.json</code></li>
+    </ol>
+  </div>
+
+  <script>
+    function drawIcon(size) {
+      const canvas = document.getElementById('icon-' + size);
+      const ctx = canvas.getContext('2d');
+
+      // Background - dark rounded
+      const radius = size * 0.2;
+      ctx.beginPath();
+      ctx.moveTo(radius, 0);
+      ctx.lineTo(size - radius, 0);
+      ctx.quadraticCurveTo(size, 0, size, radius);
+      ctx.lineTo(size, size - radius);
+      ctx.quadraticCurveTo(size, size, size - radius, size);
+      ctx.lineTo(radius, size);
+      ctx.quadraticCurveTo(0, size, 0, size - radius);
+      ctx.lineTo(0, radius);
+      ctx.quadraticCurveTo(0, 0, radius, 0);
+      ctx.closePath();
+
+      // Gradient background
+      const grad = ctx.createLinearGradient(0, 0, size, size);
+      grad.addColorStop(0, '#1a1a2e');
+      grad.addColorStop(1, '#0f0f23');
+      ctx.fillStyle = grad;
+      ctx.fill();
+
+      // Subtle border
+      ctx.strokeStyle = 'rgba(255, 111, 0, 0.4)';
+      ctx.lineWidth = Math.max(1, size * 0.02);
+      ctx.stroke();
+
+      // Warning triangle
+      const triSize = size * 0.55;
+      const triX = size * 0.5;
+      const triY = size * 0.42;
+
+      ctx.beginPath();
+      ctx.moveTo(triX, triY - triSize * 0.45);
+      ctx.lineTo(triX + triSize * 0.45, triY + triSize * 0.35);
+      ctx.lineTo(triX - triSize * 0.45, triY + triSize * 0.35);
+      ctx.closePath();
+
+      const triGrad = ctx.createLinearGradient(triX, triY - triSize * 0.45, triX, triY + triSize * 0.35);
+      triGrad.addColorStop(0, '#ffd54f');
+      triGrad.addColorStop(1, '#ff6f00');
+      ctx.fillStyle = triGrad;
+      ctx.fill();
+
+      // "7" in the triangle
+      ctx.fillStyle = '#1a1a2e';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+
+      if (size >= 48) {
+        ctx.font = `900 ${size * 0.3}px -apple-system, sans-serif`;
+        ctx.fillText('7', triX, triY + triSize * 0.05);
+      } else {
+        ctx.font = `900 ${size * 0.35}px -apple-system, sans-serif`;
+        ctx.fillText('7', triX, triY + triSize * 0.05);
+      }
+
+      // "SINS" text at bottom (only for larger sizes)
+      if (size >= 48) {
+        ctx.fillStyle = '#eee';
+        ctx.font = `800 ${size * 0.11}px -apple-system, sans-serif`;
+        ctx.letterSpacing = `${size * 0.02}px`;
+        ctx.fillText('SINS', size * 0.5, size * 0.87);
+      }
+    }
+
+    function download(size) {
+      const canvas = document.getElementById('icon-' + size);
+      const link = document.createElement('a');
+      link.download = 'icon' + size + '.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+
+    // Draw all icons
+    [16, 48, 128].forEach(drawIcon);
+  </script>
+</body>
+</html>

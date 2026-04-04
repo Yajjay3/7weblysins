@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 340" preserveAspectRatio="none">
+  <defs>
+    <!-- Parchment fill -->
+    <linearGradient id="parchment" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#dcc89c"/>
+      <stop offset="8%" stop-color="#e8d8b0"/>
+      <stop offset="20%" stop-color="#f0e4c4"/>
+      <stop offset="50%" stop-color="#f5edd4"/>
+      <stop offset="80%" stop-color="#f0e4c4"/>
+      <stop offset="92%" stop-color="#e8d8b0"/>
+      <stop offset="100%" stop-color="#dcc89c"/>
+    </linearGradient>
+    <!-- Subtle horizontal shading near the rolls -->
+    <linearGradient id="parchSideShade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="rgba(0,0,0,0.12)"/>
+      <stop offset="4%" stop-color="rgba(0,0,0,0)"/>
+      <stop offset="96%" stop-color="rgba(0,0,0,0)"/>
+      <stop offset="100%" stop-color="rgba(0,0,0,0.12)"/>
+    </linearGradient>
+    <!-- Wood handle gradient -->
+    <linearGradient id="wood" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8b7340"/>
+      <stop offset="15%" stop-color="#a08850"/>
+      <stop offset="30%" stop-color="#c4a86a"/>
+      <stop offset="45%" stop-color="#d8c48a"/>
+      <stop offset="55%" stop-color="#e0d0a0"/>
+      <stop offset="65%" stop-color="#d8c48a"/>
+      <stop offset="80%" stop-color="#c4a86a"/>
+      <stop offset="90%" stop-color="#a08850"/>
+      <stop offset="100%" stop-color="#8b7340"/>
+    </linearGradient>
+    <!-- Knob gradient (slightly lighter) -->
+    <radialGradient id="knob" cx="0.45" cy="0.4" r="0.55">
+      <stop offset="0%" stop-color="#e0d0a0"/>
+      <stop offset="40%" stop-color="#c8b478"/>
+      <stop offset="70%" stop-color="#a89058"/>
+      <stop offset="100%" stop-color="#7a6530"/>
+    </radialGradient>
+    <!-- Parchment texture -->
+    <filter id="parchNoise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="4" result="noise"/>
+      <feColorMatrix type="saturate" values="0" in="noise" result="grayNoise"/>
+      <feBlend in="SourceGraphic" in2="grayNoise" mode="multiply"/>
+    </filter>
+    <!-- Drop shadow for handles -->
+    <filter id="handleShadow">
+      <feDropShadow dx="2" dy="2" stdDeviation="2" flood-color="rgba(0,0,0,0.3)"/>
+    </filter>
+  </defs>
+
+  <!-- === LEFT HANDLE === -->
+  <g filter="url(#handleShadow)">
+    <!-- Top knob (finial) -->
+    <ellipse cx="42" cy="22" rx="16" ry="14" fill="url(#knob)"/>
+    <ellipse cx="42" cy="22" rx="16" ry="14" fill="none" stroke="#7a6530" stroke-width="0.5"/>
+    <!-- Rod -->
+    <rect x="30" y="22" width="24" height="296" rx="2" fill="url(#wood)"/>
+    <!-- Bottom knob (finial) -->
+    <ellipse cx="42" cy="318" rx="16" ry="14" fill="url(#knob)"/>
+    <ellipse cx="42" cy="318" rx="16" ry="14" fill="none" stroke="#7a6530" stroke-width="0.5"/>
+  </g>
+
+  <!-- === RIGHT HANDLE === -->
+  <g filter="url(#handleShadow)">
+    <!-- Top knob (finial) -->
+    <ellipse cx="958" cy="22" rx="16" ry="14" fill="url(#knob)"/>
+    <ellipse cx="958" cy="22" rx="16" ry="14" fill="none" stroke="#7a6530" stroke-width="0.5"/>
+    <!-- Rod -->
+    <rect x="946" y="22" width="24" height="296" rx="2" fill="url(#wood)"/>
+    <!-- Bottom knob (finial) -->
+    <ellipse cx="958" cy="318" rx="16" ry="14" fill="url(#knob)"/>
+    <ellipse cx="958" cy="318" rx="16" ry="14" fill="none" stroke="#7a6530" stroke-width="0.5"/>
+  </g>
+
+  <!-- === PARCHMENT BODY === -->
+  <!-- Wavy-edge parchment between the handles -->
+  <path d="
+    M 50,28
+    Q 60,18 80,26 Q 105,34 130,22 Q 155,14 180,24 Q 205,34 230,22
+    Q 255,14 280,24 Q 305,34 330,22 Q 355,14 380,24 Q 405,34 430,22
+    Q 455,14 480,24 Q 505,34 530,22 Q 555,14 580,24 Q 605,34 630,22
+    Q 655,14 680,24 Q 705,34 730,22 Q 755,14 780,24 Q 805,34 830,22
+    Q 855,14 880,24 Q 905,34 930,22 Q 945,16 950,28
+
+    L 950,312
+    Q 945,324 930,318 Q 905,306 880,316 Q 855,326 830,318
+    Q 805,306 780,316 Q 755,326 730,318 Q 705,306 680,316
+    Q 655,326 630,318 Q 605,306 580,316 Q 555,326 530,318
+    Q 505,306 480,316 Q 455,326 430,318 Q 405,306 380,316
+    Q 355,326 330,318 Q 305,306 280,316 Q 255,326 230,318
+    Q 205,306 180,316 Q 155,326 130,318 Q 105,306 80,316
+    Q 60,322 50,312
+    Z
+  " fill="url(#parchment)" filter="url(#parchNoise)"/>
+
+  <!-- Side shading overlay -->
+  <path d="
+    M 50,28
+    Q 60,18 80,26 Q 105,34 130,22 Q 155,14 180,24 Q 205,34 230,22
+    Q 255,14 280,24 Q 305,34 330,22 Q 355,14 380,24 Q 405,34 430,22
+    Q 455,14 480,24 Q 505,34 530,22 Q 555,14 580,24 Q 605,34 630,22
+    Q 655,14 680,24 Q 705,34 730,22 Q 755,14 780,24 Q 805,34 830,22
+    Q 855,14 880,24 Q 905,34 930,22 Q 945,16 950,28
+
+    L 950,312
+    Q 945,324 930,318 Q 905,306 880,316 Q 855,326 830,318
+    Q 805,306 780,316 Q 755,326 730,318 Q 705,306 680,316
+    Q 655,326 630,318 Q 605,306 580,316 Q 555,326 530,318
+    Q 505,306 480,316 Q 455,326 430,318 Q 405,306 380,316
+    Q 355,326 330,318 Q 305,306 280,316 Q 255,326 230,318
+    Q 205,306 180,316 Q 155,326 130,318 Q 105,306 80,316
+    Q 60,322 50,312
+    Z
+  " fill="url(#parchSideShade)"/>
+</svg>

@@ -1,0 +1,357 @@
+/* ============================================================
+   7 DEADLY SINS — Banner Styles (injected on every page)
+   ============================================================ */
+
+#deadly-sin-banner {
+  position: fixed;
+  bottom: -400px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2147483647;
+  width: 96%;
+  max-width: 700px;
+  transition: bottom 0.4s ease;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  pointer-events: auto;
+}
+
+#deadly-sin-banner.dsb-visible {
+  bottom: 60px;
+}
+
+.dsb-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 28px 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Warning banner (sin detected) */
+.dsb-warning .dsb-inner {
+  background: rgba(200, 35, 25, 0.95);
+  border: 1px solid rgba(255, 150, 150, 0.25);
+}
+
+/* Positive banner (virtue detected) */
+.dsb-positive .dsb-inner {
+  background: rgba(50, 80, 55, 0.95);
+  border: 1px solid rgba(150, 220, 150, 0.25);
+}
+
+.dsb-emoji {
+  font-size: 48px;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 4px;
+}
+
+.dsb-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.dsb-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 10px;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+.dsb-message {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #ddd;
+}
+
+.dsb-close {
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 28px;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+
+.dsb-close:hover {
+  color: #fff;
+}
+
+/* Flashing banner border animation (premium) */
+@keyframes dsb-flash-warning {
+  0%, 100% { 
+    box-shadow: 0 0 0px 0px rgba(255, 100, 80, 0), 0 8px 32px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 150, 150, 0.1);
+  }
+  50% { 
+    box-shadow: 0 0 25px 8px rgba(255, 100, 80, 0.7), 0 8px 32px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 200, 150, 0.9);
+  }
+}
+
+@keyframes dsb-flash-positive {
+  0%, 100% { 
+    box-shadow: 0 0 0px 0px rgba(100, 255, 120, 0), 0 8px 32px rgba(0, 0, 0, 0.4);
+    border-color: rgba(150, 255, 150, 0.1);
+  }
+  50% { 
+    box-shadow: 0 0 25px 8px rgba(100, 255, 120, 0.7), 0 8px 32px rgba(0, 0, 0, 0.4);
+    border-color: rgba(150, 255, 150, 0.9);
+  }
+}
+
+#deadly-sin-banner.dsb-flashing .dsb-inner {
+  border-width: 2px;
+  border-style: solid;
+}
+
+#deadly-sin-banner.dsb-flashing.dsb-warning .dsb-inner {
+  animation: dsb-flash-warning 1s ease-in-out infinite;
+}
+
+#deadly-sin-banner.dsb-flashing.dsb-positive .dsb-inner {
+  animation: dsb-flash-positive 1s ease-in-out infinite;
+}
+
+/* ============================================================
+   BANNER STYLE: SCROLL
+   Parchment scroll with SVG background image
+   ============================================================ */
+#deadly-sin-banner.dsb-style-scroll {
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.35));
+}
+#deadly-sin-banner.dsb-style-scroll .dsb-inner {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  position: relative;
+  padding: 28px 80px;
+}
+#deadly-sin-banner.dsb-style-scroll .dsb-message {
+  color: #3e2c0a;
+  font-style: italic;
+}
+#deadly-sin-banner.dsb-style-scroll .dsb-title {
+  color: #5c3d10 !important;
+}
+#deadly-sin-banner.dsb-style-scroll .dsb-close {
+  color: #8b6d38;
+}
+#deadly-sin-banner.dsb-style-scroll .dsb-close:hover {
+  color: #3e2c0a;
+}
+
+/* ============================================================
+   BANNER STYLE: VIDEO SCREEN
+   CRT / retro TV monitor look with scanlines & static
+   Uses --video-text-color CSS custom property for dynamic color
+   ============================================================ */
+#deadly-sin-banner.dsb-style-video {
+  --video-text-color: #00ff41;
+  padding-bottom: 38px;
+}
+/* TV stand — neck + base */
+#deadly-sin-banner.dsb-style-video::before {
+  content: '';
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 26px;
+  background: linear-gradient(90deg, #3a3a3a, #4a4a4a 40%, #555 50%, #4a4a4a 60%, #3a3a3a);
+  border-radius: 2px;
+  z-index: 5;
+}
+#deadly-sin-banner.dsb-style-video::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 240px;
+  height: 14px;
+  background: linear-gradient(180deg, #666, #4a4a4a 30%, #3a3a3a 60%, #2a2a2a);
+  border-radius: 4px 4px 6px 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+  z-index: 5;
+}
+#deadly-sin-banner.dsb-style-video .dsb-inner {
+  background: #0a0a0a;
+  border: 12px solid;
+  border-image: linear-gradient(180deg, #4a4a4a, #2a2a2a 30%, #1a1a1a 70%, #0d0d0d) 1;
+  border-radius: 0;
+  box-shadow:
+    inset 0 0 60px rgba(0, 255, 65, 0.06),
+    0 0 20px rgba(0, 0, 0, 0.8),
+    0 0 4px rgba(0, 255, 65, 0.2),
+    inset 0 0 0 2px #555;
+  position: relative;
+  overflow: hidden;
+}
+#deadly-sin-banner.dsb-style-video .dsb-inner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.15) 2px,
+    rgba(0, 0, 0, 0.15) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+#deadly-sin-banner.dsb-style-video .dsb-inner::after {
+  content: '';
+  position: absolute;
+  top: -14px; left: -14px; right: -14px; bottom: -14px;
+  border: 3px solid #666;
+  border-radius: 6px;
+  box-shadow:
+    inset 0 2px 4px rgba(255,255,255,0.08),
+    inset 0 -2px 4px rgba(0,0,0,0.4),
+    0 3px 10px rgba(0,0,0,0.6);
+  pointer-events: none;
+}
+#deadly-sin-banner.dsb-style-video .dsb-message {
+  color: var(--video-text-color);
+  text-shadow: 0 0 6px color-mix(in srgb, var(--video-text-color) 50%, transparent);
+  font-family: 'Courier New', monospace;
+  position: relative;
+  z-index: 2;
+}
+#deadly-sin-banner.dsb-style-video .dsb-title {
+  color: var(--video-text-color) !important;
+  text-shadow: 0 0 8px color-mix(in srgb, var(--video-text-color) 60%, transparent);
+  font-family: 'Courier New', monospace;
+  position: relative;
+  z-index: 2;
+}
+#deadly-sin-banner.dsb-style-video .dsb-emoji {
+  position: relative;
+  z-index: 2;
+}
+#deadly-sin-banner.dsb-style-video .dsb-close {
+  color: var(--video-text-color);
+  position: relative;
+  z-index: 2;
+}
+#deadly-sin-banner.dsb-style-video .dsb-close:hover {
+  color: #fff;
+}
+/* Inner glow matches user text color */
+#deadly-sin-banner.dsb-style-video .dsb-inner {
+  box-shadow:
+    inset 0 0 60px color-mix(in srgb, var(--video-text-color) 6%, transparent),
+    0 0 20px rgba(0, 0, 0, 0.8),
+    0 0 4px color-mix(in srgb, var(--video-text-color) 25%, transparent);
+}
+
+/* ============================================================
+   BANNER STYLE: NEON
+   Glass-like panel with glowing neon edge
+   Uses --neon-color CSS custom property for dynamic color
+   ============================================================ */
+#deadly-sin-banner.dsb-style-neon {
+  --neon-color: #ff3333;
+}
+@keyframes dsb-neon-pulse {
+  0%, 100% {
+    box-shadow:
+      inset 0 0 20px color-mix(in srgb, var(--neon-color) 10%, transparent),
+      0 0 10px color-mix(in srgb, var(--neon-color) 50%, transparent),
+      0 0 30px color-mix(in srgb, var(--neon-color) 25%, transparent),
+      0 0 60px color-mix(in srgb, var(--neon-color) 12%, transparent);
+  }
+  50% {
+    box-shadow:
+      inset 0 0 25px color-mix(in srgb, var(--neon-color) 15%, transparent),
+      0 0 18px color-mix(in srgb, var(--neon-color) 65%, transparent),
+      0 0 45px color-mix(in srgb, var(--neon-color) 35%, transparent),
+      0 0 80px color-mix(in srgb, var(--neon-color) 18%, transparent);
+  }
+}
+#deadly-sin-banner.dsb-style-neon .dsb-inner {
+  background:
+    linear-gradient(135deg,
+      rgba(255,255,255,0.12) 0%,
+      rgba(255,255,255,0.05) 25%,
+      rgba(0,0,0,0.0) 50%,
+      rgba(255,255,255,0.03) 75%,
+      rgba(255,255,255,0.08) 100%),
+    linear-gradient(180deg,
+      rgba(255,255,255,0.08) 0%,
+      rgba(0,0,0,0.0) 40%,
+      rgba(0,0,0,0.3) 100%),
+    rgba(10, 10, 14, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 16px;
+  border: 6px solid var(--neon-color);
+  animation: dsb-neon-pulse 2s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+}
+/* Glass highlight streak across the top */
+#deadly-sin-banner.dsb-style-neon .dsb-inner::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -20%;
+  width: 140%;
+  height: 45%;
+  background: linear-gradient(180deg,
+    rgba(255,255,255,0.13) 0%,
+    rgba(255,255,255,0.06) 50%,
+    transparent 100%);
+  border-radius: 16px 16px 50% 50%;
+  pointer-events: none;
+}
+/* Subtle bottom reflection */
+#deadly-sin-banner.dsb-style-neon .dsb-inner::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 10%; right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(255,255,255,0.15),
+    transparent);
+  pointer-events: none;
+}
+#deadly-sin-banner.dsb-style-neon .dsb-message {
+  color: rgba(255,255,255,0.85);
+  text-shadow: 0 0 6px color-mix(in srgb, var(--neon-color) 30%, transparent);
+  position: relative;
+  z-index: 1;
+}
+#deadly-sin-banner.dsb-style-neon .dsb-title {
+  color: var(--neon-color) !important;
+  text-shadow: 0 0 10px color-mix(in srgb, var(--neon-color) 50%, transparent);
+  position: relative;
+  z-index: 1;
+}
+#deadly-sin-banner.dsb-style-neon .dsb-emoji {
+  position: relative;
+  z-index: 1;
+}
+#deadly-sin-banner.dsb-style-neon .dsb-close {
+  color: rgba(255,255,255,0.5);
+  text-shadow: none;
+  position: relative;
+  z-index: 1;
+}
+#deadly-sin-banner.dsb-style-neon .dsb-close:hover {
+  color: #fff;
+}
