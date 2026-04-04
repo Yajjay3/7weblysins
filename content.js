@@ -52,8 +52,8 @@ const SITE_RULES = [
   // --- SHOPPING → GREED ---
   {
     sin: 'greed',
-    urlPatterns: ['amazon', 'ebay', 'walmart', 'target', 'bestbuy', 'etsy', 'shopify', 'aliexpress', 'wish.com', 'macys', 'nordstrom', 'zappos', 'shein', 'temu', 'costco', 'wayfair', 'overstock', 'newegg', 'sephora', 'ulta.com', 'zara.com', 'hm.com', 'asos.com', 'forever21', 'fashionnova', 'gap.com', 'oldnavy.com', 'jcrew.com', 'kohls.com', 'tjmaxx.com', 'marshalls.com', 'gamestop.com', 'stockx.com', 'goat.com', 'poshmark.com', 'mercari.com', 'offerup.com', 'craigslist.org', 'ikea.com', 'bathandbodyworks', 'victoriassecret', 'adidas.com', 'underarmour.com', 'lululemon.com', 'anthropologie.com', 'urbanoutfitters.com', 'freepeople.com', 'dickssportinggoods.com', 'cabelas.com', 'basspro.com', 'rei.com', 'slickdeals.net', 'joinhoney.com', 'louisvuitton.com', 'gucci.com', 'rolex.com', 'prada.com', 'chanel.com', 'hermes.com', 'burberry.com', 'cartier.com', 'tiffany.com', 'groupon.com', 'retailmenot.com', 'coupons.com', 'woot.com', 'coinbase.com', 'binance.com', 'crypto.com', 'kraken.com'],
-    pageKeywords: ['clothing', 'apparel', 'toy store', 'gift shop', 'boutique', 'jewelry', 'jewellery', 'necklace', 'bracelet', 'earrings', 'shoe store', 'sporting goods', 'furniture', 'designer bag', 'designer bags', 'luxury watch', 'watch store', 'watches', 'sunglasses', 'pawn shop', 'casino', 'jackpot', 'law firm', 'law office', 'attorney', 'lawyer', 'legal services', 'personal injury', 'free consultation'],
+    urlPatterns: ['amazon', 'ebay', 'walmart', 'target', 'bestbuy', 'etsy', 'shopify', 'aliexpress', 'wish.com', 'macys', 'nordstrom', 'zappos', 'shein', 'temu', 'costco', 'wayfair', 'overstock', 'newegg', 'zara.com', 'hm.com', 'asos.com', 'forever21', 'gap.com', 'oldnavy.com', 'jcrew.com', 'kohls.com', 'tjmaxx.com', 'marshalls.com', 'gamestop.com', 'stockx.com', 'goat.com', 'poshmark.com', 'mercari.com', 'offerup.com', 'craigslist.org', 'ikea.com', 'adidas.com', 'underarmour.com', 'lululemon.com', 'dickssportinggoods.com', 'cabelas.com', 'basspro.com', 'rei.com', 'slickdeals.net', 'joinhoney.com', 'louisvuitton.com', 'gucci.com', 'rolex.com', 'prada.com', 'chanel.com', 'hermes.com', 'burberry.com', 'cartier.com', 'tiffany.com', 'groupon.com', 'retailmenot.com', 'coupons.com', 'woot.com', 'coinbase.com', 'binance.com', 'crypto.com', 'kraken.com'],
+    pageKeywords: ['electronics', 'electronic store', 'computer store', 'gaming console', 'tv deals', 'laptop sale', 'toy store', 'gift shop', 'boutique', 'collectible', 'collectibles', 'trading cards', 'sports cards', 'pokemon cards', 'sneakers', 'fandom merch', 'funko', 'funko pop', 'pop culture merch', 'merch store', 'home decor', 'home décor', 'decor', 'wall art', 'throw pillows', 'candles', 'clothing', 'apparel', 'shoe store', 'sporting goods', 'pawn shop', 'casino', 'jackpot', 'law firm', 'law office', 'attorney', 'lawyer', 'legal services', 'personal injury', 'free consultation'],
     messages: [
       "This looks like a fun store with lots of cool stuff. But make sure you do not fall into Greed and buy a bunch of things you really do not need!",
       "Shopping can be fun, but remember — practice Temperance and Self-Control. Only buy what you truly need!",
@@ -75,7 +75,7 @@ const SITE_RULES = [
   {
     sin: 'gluttony',
     urlPatterns: ['doordash', 'ubereats', 'grubhub', 'postmates', 'seamless', 'yelp.com/biz', 'opentable', 'allrecipes', 'foodnetwork', 'epicurious', 'tastykitchen', 'dominos', 'pizzahut', 'mcdonalds', 'chipotle', 'instacart', 'safeway', 'luckysupermarkets', 'kroger', 'albertsons', 'traderjoes', 'wholefoods', 'sprouts', 'publix', 'wegmans', 'heb.com', 'aldi', 'foodlion', 'stopandshop', 'giantfood', 'winndixie', 'freshdirect', 'peapod', 'starbucks.com', 'dunkindonuts.com', 'panerabread.com', 'papajohns.com', 'burgerking.com', 'wendys.com', 'tacobell.com', 'chick-fil-a.com', 'kfc.com', 'popeyes.com', 'subway.com', 'pandaexpress.com', 'olivegarden.com', 'applebees.com', 'chilis.com', 'ihop.com', 'dennys.com', 'gopuff.com', 'slicelife.com', 'hellofresh.com', 'blueapron.com', 'cheesecakefactory.com', 'outback.com', 'redlobster.com', 'crackerbarrel.com', 'wingstop.com', 'jimmyjohns.com', 'fiveguys.com', 'shakeshack.com', 'jackinthebox.com', 'whataburger.com', 'culvers.com', 'raisingcanes.com', 'zaxbys.com', 'tasty.co', 'delish.com', 'bonappetit.com', 'yummly.com', 'sees.com', 'nuts.com', 'carvel.com', 'baskinrobbins.com', 'coldstonecreamery.com', 'dairyqueen.com', 'crumblcookies.com', 'insomniacookies.com', 'nothingbundtcakes.com', 'mrsfields.com', 'ediblearrangements.com', 'candywarehouse.com', 'sugarfina.com'],
-    pageKeywords: ['menu', 'delivery', 'appetizer', 'entree', 'dessert', 'desserts', 'restaurant', 'order food', 'bbq', 'barbecue', 'barbeque', 'ice cream', 'gelato', 'frozen yogurt', 'sweet treats', 'treats', 'candy store', 'candy shop', 'candy', 'chocolate', 'cupcake', 'cupcakes', 'cake', 'cakes', 'pie', 'pies', 'cookie', 'cookies', 'brownie', 'brownies', 'bakery', 'pastry', 'pastries', 'donut', 'donuts', 'nuts', 'sweet shop'],
+    pageKeywords: ['food menu', 'dessert menu', 'appetizer', 'entree', 'dessert', 'desserts', 'restaurant', 'order food', 'food delivery', 'dessert delivery', 'bbq', 'barbecue', 'barbeque', 'ice cream', 'gelato', 'frozen yogurt', 'sweet treats', 'treats', 'candy store', 'candy shop', 'candy', 'chocolate', 'cupcake', 'cupcakes', 'cake', 'cakes', 'pie', 'pies', 'brownie', 'brownies', 'bakery', 'pastry', 'pastries', 'donut', 'donuts', 'cookie dough', 'chocolate chip cookie', 'nuts', 'mixed nuts', 'trail mix', 'tasty', 'salted', 'roasted', 'almond', 'almonds', 'cashew', 'cashews', 'peanut', 'peanuts', 'pecan', 'pecans', 'pistachio', 'pistachios', 'sweet shop', 'hostess', 'twinkie', 'twinky', 'little debbie'],
     messages: [
       "This looks like a fun place to eat! But remember, do not be gluttonous and eat more than you need to!",
       "Food is a wonderful gift — enjoy it, but remember that Temperance is the virtue that keeps Gluttony in check.",
@@ -97,7 +97,7 @@ const SITE_RULES = [
   {
     sin: 'envy',
     urlPatterns: ['facebook.com', 'instagram.com', 'tiktok.com', 'snapchat.com', 'pinterest.com', 'threads.net', 'bsky.app', 'bereal.com', 'lemon8-app.com', 'tumblr.com', 'zillow.com', 'expedia.com', 'booking.com', 'airbnb.com', 'tripadvisor.com', 'lonelyplanet.com', 'atlasobscura.com', 'theknot.com', 'zola.com', 'weddingwire.com', 'houzz.com'],
-    pageKeywords: ['perfume', 'cologne', 'fragrance', 'nail salon', 'hair salon'],
+    pageKeywords: ['nail salon', 'hair salon'],
     messages: [
       "Social media can be fun, but be careful not to fall into Envy. Remember, people only post their highlight reels — not their real lives!",
       "Scrolling through other people's lives? Practice Kindness instead of Envy. You have your own blessings to be grateful for!",
@@ -118,8 +118,8 @@ const SITE_RULES = [
   // --- SELF-PROMOTION / VANITY → PRIDE ---
   {
     sin: 'pride',
-    urlPatterns: ['linkedin.com/in/', 'linkedin.com/feed', 'twitter.com', 'x.com', 'vsco.co', 'linktr.ee', 'about.me', 'carrd.co', 'behance.net', 'dribbble.com', 'substack.com', '500px.com', 'flickr.com', 'cameo.com', 'tmz.com', 'realself.com'],
-    pageKeywords: ['followers', 'following', 'my profile', 'my posts', 'edit profile', 'psychic', 'fortune teller', 'tarot', 'tanning salon', 'tanning bed', 'tanning', 'plastic surgery', 'cosmetic surgery', 'med spa', 'botox', 'facelift', 'tattoo', 'tattoo shop', 'beauty', 'photo studio', 'photography studio', 'photography'],
+    urlPatterns: ['linkedin.com/in/', 'linkedin.com/feed', 'twitter.com', 'x.com', 'vsco.co', 'linktr.ee', 'about.me', 'carrd.co', 'behance.net', 'dribbble.com', 'substack.com', '500px.com', 'flickr.com', 'cameo.com', 'tmz.com', 'realself.com', 'brandymelville.com', 'brandymelvilleusa.com', 'revolve.com', 'princesspolly.com', 'prettylittlething.com', 'meshki.us', 'whitefoxboutique.com', 'skims.com', 'ohpolly.com', 'houseofcb.com', 'sephora.com', 'ulta.com', 'victoriassecret.com', 'fashionnova.com', 'urbanoutfitters.com', 'freepeople.com', 'anthropologie.com', 'bathandbodyworks.com'],
+    pageKeywords: ['followers', 'following', 'my profile', 'my posts', 'edit profile', 'psychic', 'fortune teller', 'tarot', 'tanning salon', 'tanning bed', 'tanning', 'plastic surgery', 'cosmetic surgery', 'med spa', 'botox', 'facelift', 'tattoo', 'tattoo shop', 'beauty', 'photo studio', 'photography studio', 'photography', 'glam', 'glamour', 'lookbook', 'outfit inspo', 'style inspo', 'fit check', 'aesthetic', 'mirror selfie', 'selfie', 'beauty routine', 'makeup', 'makeup look', 'makeup routine', 'cosmetics', 'lipstick', 'foundation', 'eyeshadow', 'mascara', 'blush', 'concealer', 'fragrance', 'perfume', 'cologne', 'eau de parfum', 'eau de toilette', 'vanity', 'jewelry', 'jewellery', 'necklace', 'bracelet', 'earrings', 'handbag', 'handbags', 'purse', 'purses', 'luxury watch', 'watch store', 'watches', 'designer bag', 'designer bags', 'vanity bag', 'luxury vehicle', 'luxury suv', 'luxury sedan', 'premium interior', 'performance package', 'msrp $45', '$45,000', '$50,000', '$60,000', '$70,000', '$80,000', 'skincare', 'skin care', 'moisturizer', 'cleanser', 'serum', 'face wash', 'face mask', 'anti-aging', 'anti aging', 'wrinkle cream', 'retinol', 'hyaluronic', 'collagen supplement', 'collagen powder', 'collagen peptides', 'beauty supplement', 'hair growth', 'hair vitamins', 'glow', 'radiant skin', 'dermatologist', 'skin treatment', 'facial', 'chemical peel', 'microdermabrasion', 'laser treatment', 'skin rejuvenation'],
     messages: [
       "It's great to share your accomplishments, but watch out for Pride. Practice Humility — your worth isn't measured by likes and followers!",
       "Confidence is good, but Pride goes before a fall. Let your work speak for itself with quiet Discipline!",
@@ -512,8 +512,8 @@ const POSITIVE_RULES = [
     ],
   },
   {
-    urlPatterns: ['hobbytown.com', 'hobbylobby.com'],
-    pageKeywords: ['music store', 'music lessons', 'art supply', 'craft store', 'hobby store', 'hobby shop', 'escape room', 'art class', 'pottery studio', 'art workshop', 'woodworking', 'knitting', 'sewing'],
+    urlPatterns: ['hobbytown.com', 'hobbylobby.com', 'guitarcenter.com', 'sweetwater.com', 'musiciansfriend.com', 'samash.com'],
+    pageKeywords: ['music store', 'music lessons', 'art supply', 'craft store', 'hobby store', 'hobby shop', 'escape room', 'art class', 'pottery studio', 'art workshop', 'woodworking', 'knitting', 'sewing', 'guitar', 'drums', 'piano', 'keyboard', 'instrument', 'instruments', 'band'],
     virtue: 'Creativity',
     messages: [
       "Creativity feeds the soul! Whether it's art, music, or crafts — you're nurturing your creative spirit!",
@@ -632,7 +632,7 @@ const VIRTUE_CATEGORIES = [
   },
   {
     name: 'creative',
-    terms: ['music store', 'instrument', 'escape room', 'art class', 'art classes', 'painting class', 'pottery', 'pottery studio', 'pottery class', 'pottery painting', 'pottery wheel', 'art workshop', 'art studio', 'ceramics', 'ceramic shop', 'ceramics class', 'ceramics studio', 'drawing class', 'music lesson', 'music lessons', 'paint and sip', 'sculpture class', 'art store', 'art supply', 'craft store', 'michaels', 'joann', 'art creation', 'slime', 'craft class', 'hobby store', 'hobby shop', 'hobby lobby', 'hobby', 'woodworking', 'knitting', 'sewing', 'photography class', 'creative workshop', 'do art', 'art near', 'arts and crafts', 'create art', 'make art', 'paint pottery', 'painting studio', 'art place', 'art spot', 'art gallery', 'art museum', 'museum of art', 'gallery exhibit', 'fine art', 'slim kitchen', 'slimkitchen'],
+    terms: ['music store', 'instrument', 'instruments', 'guitar center', 'guitarcenter', 'guitar store', 'guitar shop', 'drum store', 'drum shop', 'piano store', 'keyboard store', 'band instruments', 'sheet music', 'music shop', 'escape room', 'art class', 'art classes', 'painting class', 'pottery', 'pottery studio', 'pottery class', 'pottery painting', 'pottery wheel', 'art workshop', 'art studio', 'ceramics', 'ceramic shop', 'ceramics class', 'ceramics studio', 'drawing class', 'music lesson', 'music lessons', 'paint and sip', 'sculpture class', 'art store', 'art supply', 'craft store', 'michaels', 'joann', 'art creation', 'slime', 'craft class', 'hobby store', 'hobby shop', 'hobby lobby', 'hobby', 'woodworking', 'knitting', 'sewing', 'photography class', 'creative workshop', 'do art', 'art near', 'arts and crafts', 'create art', 'make art', 'paint pottery', 'painting studio', 'art place', 'art spot', 'art gallery', 'art museum', 'museum of art', 'gallery exhibit', 'fine art', 'slim kitchen', 'slimkitchen'],
     messages: [
       "Creativity feeds the soul! Whether it's art, music, or crafts — you're nurturing your creative spirit!",
       "Making something with your hands or learning an instrument — that's a beautiful use of your time!",
@@ -648,7 +648,7 @@ const VIRTUE_CATEGORIES = [
   },
   {
     name: 'family',
-    terms: ['daycare', 'preschool', 'florist', 'flower shop', 'gift basket', 'greeting card', 'hallmark', 'card store', 'card shop', 'family fun', 'kids activities', 'children museum', 'family event'],
+    terms: ['daycare', 'preschool', 'florist', 'flower shop', 'gift basket', 'greeting card', 'hallmark', 'card store', 'card shop', 'family fun', 'kids activities', 'children museum', 'family event', 'gift store', 'gift shop', 'party store', 'party supplies', 'party city', 'balloon', 'balloons', 'celebration', 'birthday party', 'baby shower', 'bridal shower', 'anniversary', 'graduation party', 'party decorations', 'party favors', 'pinata', 'streamers', 'confetti', 'invitation', 'invitations', 'event planning', 'party planning', 'celebrate'],
     messages: [
       "Taking care of family and loved ones is one of life's greatest virtues! You're making a difference!",
       "Flowers, family, and love — these are the things that truly matter. Your Thoughtfulness is showing!",
@@ -658,6 +658,11 @@ const VIRTUE_CATEGORIES = [
       "Family first — and you're clearly someone who lives by that. What a wonderful quality!",
       "The little acts of love and care you do every day add up to something incredible. Keep it up!",
       "Sending flowers, picking out gifts, caring for kids — these are the moments that really matter!",
+      "Celebrating life's special moments with loved ones — that's what it's all about! Your Generosity is beautiful!",
+      "Planning a party or picking out the perfect gift? That's love in action! Quality time with family and friends is priceless!",
+      "Birthdays, showers, graduations — these are the milestones that bring people together. Cherish every one!",
+      "The best gifts aren't things — they're the time and thought you put into making someone feel special!",
+      "Celebrations bring people closer. Your dedication to making memories with loved ones is truly heartwarming!",
     ],
   },
   {
@@ -726,32 +731,35 @@ const VIRTUE_CATEGORIES = [
 // ============================================================
 const SIGNAL_SIN_TERMS = {
   greed: ['shopping', 'clothes', 'clothing', 'boutique', 'fashion', 'shoes',
-    'jewelry', 'furniture', 'retail', 'outlet', 'vintage', 'antique',
-    'electronics', 'gifts', 'toys', 'home goods', 'accessories', 'mall',
-    'shoe store', 'department store', 'cosmetics', 'beauty supply', 'pawn shop',
-    'toy store',
-    'jewelry store', 'watch store', 'sunglasses', 'casino'],
+    'retail', 'outlet', 'vintage', 'antique',
+    'electronics', 'gifts', 'toys', 'home goods', 'home decor', 'home décor', 'decor', 'accessories', 'mall',
+    'shoe store', 'department store', 'pawn shop', 'toy store', 'collectible', 'collectibles', 'trading cards', 'sports cards', 'pokemon cards', 'sneakers', 'fandom merch', 'funko', 'funko pop', 'pop culture merch', 'merch store',
+    'sunglasses', 'casino'],
   gluttony: ['restaurant', 'restaurants', 'food', 'pizza', 'sushi', 'burger',
     'taco', 'ramen', 'pho restaurant', 'pho soup', 'pho noodle', 'steakhouse', 'seafood', 'bakery', 'deli', 'buffet',
     'brunch', 'dinner', 'lunch', 'breakfast', 'cafe', 'coffee', 'dining',
     'grocery', 'supermarket', 'bar and grill', 'sports bar', 'cocktail bar', 'wine bar', 'grill', 'chinese', 'mexican', 'italian',
     'thai', 'indian', 'japanese', 'korean', 'vietnamese', 'mediterranean',
     'fast food', 'ice cream', 'gelato', 'frozen yogurt', 'donut', 'donuts', 'sandwich', 'wings', 'bbq', 'barbecue', 'barbeque',
-    'candy', 'candies', 'chocolate', 'sweets', 'sweet treats', 'dessert', 'desserts', 'pastry', 'pastries', 'cupcake', 'cupcakes', 'cake', 'cakes', 'pie', 'pies', 'cookie', 'cookies', 'brownie', 'brownies', 'nuts',
-    'nightclub', 'night club', 'pub', 'tavern', 'brewery', 'winery',
-    'liquor store', 'liquor', 'wine shop', 'wine store', 'beer'],
+    'candy', 'candies', 'chocolate', 'sweets', 'sweet treats', 'dessert', 'desserts', 'pastry', 'pastries', 'cupcake', 'cupcakes', 'cake', 'cakes', 'pie', 'pies', 'cookie', 'cookies', 'brownie', 'brownies', 'nuts', 'mixed nuts', 'trail mix', 'tasty', 'salted', 'roasted', 'almond', 'almonds', 'cashew', 'cashews', 'peanut', 'peanuts', 'pecan', 'pecans', 'pistachio', 'pistachios', 'hostess', 'twinkie', 'twinky', 'little debbie',
+    'nightclub', 'night club', 'pub', 'tavern', 'brewery', 'winery', 'cocktails', 'whiskey', 'vodka', 'tequila', 'bourbon', 'rum', 'champagne',
+    'liquor store', 'liquor', 'wine shop', 'wine store', 'beer', 'alcohol'],
   sloth: ['gaming', 'video game', 'internet cafe', 'vr lounge', 'esports',
     'hookah', 'vape', 'day spa', 'spa near', 'spa and', 'massage', 'movie theater', 'movie theatre', 'cinema',
     'arcade', 'smoke shop', 'cigar', 'tobacco', 'record store', 'vinyl records', 'vinyl shop'],
-  envy: ['nail salon', 'hair salon', 'auto dealer', 'car dealer',
-    'car dealership', 'dealership', 'phone store', 'cell phone', 'verizon', 'att store',
-    't-mobile', 'mobile store', 'perfume', 'cologne', 'fragrance'],
+  envy: ['nail salon', 'hair salon',
+    'phone store', 'cell phone', 'verizon', 'att store',
+    't-mobile', 'mobile store'],
   pride: ['tattoo', 'tattoo shop', 'tattoo parlor',
     'car wash', 'wedding venue', 'bridal shop', 'bridal',
     'psychic', 'fortune teller', 'tanning salon', 'tanning',
     'plastic surgeon', 'plastic surgery', 'med spa', 'cosmetic surgery',
-    'photo studio', 'photography studio', 'photography', 'beauty',
-    'dress store', 'dress shop', 'dresses'],
+    'photo studio', 'photography studio', 'photography', 'beauty', 'makeup', 'cosmetics', 'lipstick', 'foundation', 'eyeshadow', 'mascara', 'blush', 'concealer', 'perfume', 'cologne', 'fragrance', 'eau de parfum', 'eau de toilette',
+    'dress store', 'dress shop', 'dresses', 'jewelry', 'jewellery', 'jewelry store', 'watch store', 'luxury watch', 'watches', 'handbag', 'handbags', 'purse', 'purses', 'designer bag', 'designer bags', 'brandy melville', 'revolve',
+    'princess polly', 'pretty little thing', 'meshki', 'white fox boutique',
+    'skims', 'oh polly', 'house of cb', 'lookbook', 'outfit inspo', 'fit check',
+    'luxury car', 'luxury vehicle', 'luxury suv', 'luxury sedan', 'premium interior', 'performance package', 'bmw', 'mercedes', 'audi', 'lexus', 'porsche', 'range rover', 'maserati', 'bentley', 'ferrari', 'lamborghini', '$45,000', '$50,000', '$60,000', '$70,000', '$80,000',
+    'skincare', 'skin care', 'moisturizer', 'cleanser', 'serum', 'face wash', 'face mask', 'anti-aging', 'anti aging', 'retinol', 'hyaluronic', 'collagen supplement', 'beauty supplement', 'hair growth', 'hair vitamins', 'dermatologist', 'facial', 'chemical peel', 'microdermabrasion', 'laser treatment', 'skin rejuvenation'],
   wrath: ['gun store', 'gun shop', 'gun range', 'shooting range', 'firearms'],
   lust: ['strip club', 'stripclub', 'adult entertainment', 'gentleman club', 'gentlemens club'],
 };
@@ -826,7 +834,7 @@ function checkSignalForResult(signal, enabledSins) {
   }
 
   // Check sin terms
-  const sinPriority = ['gluttony', 'greed', 'lust', 'sloth', 'envy', 'pride', 'wrath'];
+  const sinPriority = ['gluttony', 'pride', 'greed', 'lust', 'sloth', 'envy', 'wrath'];
   for (const sinType of sinPriority) {
     const terms = SIGNAL_SIN_TERMS[sinType];
     if (terms && terms.some(kw => signal.includes(kw))) {
@@ -857,9 +865,73 @@ function isSearchEngine(url) {
     url.includes('yelp.com');
 }
 
+function detectNutContext(url, text) {
+  const source = `${url} ${text}`;
+  if (!source.includes('nuts')) return null;
+
+  const hardwareTerms = ['hardware', 'steel', 'bolt', 'bolts', 'screw', 'screws', 'washer', 'washers', 'fastener', 'fasteners', 'hex nut', 'hex nuts', 'lock nut', 'lock nuts', 'home depot', 'lowes', 'ace hardware', 'true value', 'menards'];
+  if (hardwareTerms.some(term => source.includes(term))) {
+    const homeImprovement = VIRTUE_CATEGORIES.find(cat => cat.name === 'homeImprovement');
+    return {
+      type: 'positive',
+      sinKey: null,
+      emoji: '😇',
+      name: 'Virtue',
+      color: '#81c784',
+      message: pickRandom(homeImprovement ? homeImprovement.messages : POSITIVE_RULES[0].messages),
+    };
+  }
+
+  const snackTerms = ['tasty', 'salted', 'roasted', 'almond', 'almonds', 'cashew', 'cashews', 'peanut', 'peanuts', 'pecan', 'pecans', 'pistachio', 'pistachios', 'trail mix', 'mixed nuts'];
+  if (snackTerms.some(term => source.includes(term))) {
+    const gluttonyRule = SITE_RULES.find(rule => rule.sin === 'gluttony');
+    if (gluttonyRule) {
+      const sin = SINS.gluttony;
+      return {
+        type: 'warning',
+        sinKey: 'gluttony',
+        emoji: sin.emoji,
+        name: sin.name,
+        color: sin.color,
+        message: pickRandom(gluttonyRule.messages),
+      };
+    }
+  }
+
+  return null;
+}
+
+function detectCarContext(url, text) {
+  const source = `${url} ${text}`;
+  const carTerms = ['dealer', 'dealers', 'dealership', 'vehicle', 'vehicles', 'suv', 'sedan', 'truck', 'lease', 'leasing', 'finance', 'financing', 'inventory', 'test drive', 'pre-owned', 'certified pre-owned', 'build your own', 'build & price', 'msrp', 'auto mall', 'auto center', 'honda', 'toyota', 'ford', 'chevrolet', 'chevy', 'nissan', 'hyundai', 'kia', 'subaru', 'mazda', 'volkswagen', 'vw', 'volvo', 'acura', 'infiniti', 'cadillac', 'lincoln', 'buick', 'gmc', 'jeep', 'ram', 'dodge', 'chrysler', 'bmw', 'mercedes', 'audi', 'lexus', 'porsche', 'tesla', 'range rover', 'land rover', 'maserati', 'bentley', 'ferrari', 'lamborghini'];
+  if (!carTerms.some(term => source.includes(term))) return null;
+
+  const luxuryTerms = ['bmw', 'mercedes', 'audi', 'lexus', 'porsche', 'tesla', 'range rover', 'land rover', 'maserati', 'bentley', 'ferrari', 'lamborghini', 'rolls royce', 'rolls-royce', 'luxury vehicle', 'luxury suv', 'luxury sedan', 'premium interior', 'performance package', 'ultimate driving machine'];
+  const highPrice = Array.from(source.matchAll(/\$\s?(\d{2,3})(,\d{3})+/g)).some(match => {
+    const amount = Number(match[0].replace(/[^0-9]/g, ''));
+    return amount >= 45000;
+  });
+
+  const isLuxury = luxuryTerms.some(term => source.includes(term)) || highPrice;
+  if (!isLuxury) return null; // Regular cars show nothing
+
+  const rule = SITE_RULES.find(rule => rule.sin === 'pride');
+  const sin = SINS.pride;
+  if (!rule || !sin) return null;
+
+  return {
+    type: 'warning',
+    sinKey: 'pride',
+    emoji: sin.emoji,
+    name: sin.name,
+    color: sin.color,
+    message: pickRandom(rule.messages),
+  };
+}
+
 function detectPageContentSin(url, text, enabledSins) {
   const source = `${url} ${text}`;
-  const sinPriority = ['gluttony', 'greed', 'lust', 'sloth', 'envy', 'pride', 'wrath'];
+  const sinPriority = ['gluttony', 'pride', 'greed', 'lust', 'sloth', 'envy', 'wrath'];
   const scoredMatches = [];
 
   for (const rule of SITE_RULES) {
@@ -914,6 +986,20 @@ function detectSin(settings) {
     return null;
   }
 
+  // Special handling for nut/snack pages vs hardware nuts/bolts pages
+  const nutContextResult = detectNutContext(url, text);
+  if (nutContextResult) return nutContextResult;
+
+  // Car pages should not fall into food categories
+  // Regular dealerships lean Envy; luxury or $45k+ cars lean Pride
+  const carContextResult = detectCarContext(url, text);
+  if (carContextResult) return carContextResult;
+
+  // Let strong page-specific sin signals win first
+  // (e.g. dessert pages on bargain sites should still be Gluttony)
+  const pageSpecificSin = detectPageContentSin(url, text, enabledSins);
+  if (pageSpecificSin) return pageSpecificSin;
+
   // First check positive rules by URL
   for (const rule of POSITIVE_RULES) {
     for (const pattern of rule.urlPatterns) {
@@ -949,7 +1035,7 @@ function detectSin(settings) {
     }
   }
 
-  // Prefer virtue from the actual page content before generic shopping warnings
+  // Prefer virtue from the actual page content before broad site-based fallbacks
   const normalizedUrl = url.replace(/[^a-z0-9]/g, '');
   for (const cat of VIRTUE_CATEGORIES) {
     const hasUrlMatch = cat.terms.some(term => {
@@ -984,10 +1070,6 @@ function detectSin(settings) {
       };
     }
   }
-
-  // Then let the actual page content decide the sin on mixed shopping sites
-  const pageSpecificSin = detectPageContentSin(url, text, enabledSins);
-  if (pageSpecificSin) return pageSpecificSin;
 
   // Finally fall back to broad site-based matches
   for (const rule of SITE_RULES) {

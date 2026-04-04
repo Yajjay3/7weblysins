@@ -98,8 +98,12 @@ async function init() {
     document.querySelectorAll('.sin-toggle').forEach(toggle => {
       if (isPremium) {
         const sin = toggle.dataset.sin;
+        toggle.disabled = false;
         toggle.checked = enabledSins[sin] !== false;
-        toggle.addEventListener('change', () => saveSinToggles());
+        if (!toggle.dataset.bound) {
+          toggle.addEventListener('change', saveSinToggles);
+          toggle.dataset.bound = 'true';
+        }
       } else {
         toggle.checked = true;
         toggle.disabled = true;
@@ -182,9 +186,15 @@ async function init() {
             chrome.storage.local.get(['settings', 'customEmojis'], (r) => {
               showPremiumUI(r.customEmojis || {}, r.settings || {});
               loadDashboard();
+              const savedEnabledSins = (r.settings && r.settings.enabledSins) || {};
               document.querySelectorAll('.sin-toggle').forEach(toggle => {
+                const sin = toggle.dataset.sin;
                 toggle.disabled = false;
-                toggle.addEventListener('change', () => saveSinToggles());
+                toggle.checked = savedEnabledSins[sin] !== false;
+                if (!toggle.dataset.bound) {
+                  toggle.addEventListener('change', saveSinToggles);
+                  toggle.dataset.bound = 'true';
+                }
               });
               document.getElementById('sins-premium-notice').style.display = 'none';
               // Unlock all premium settings sections
