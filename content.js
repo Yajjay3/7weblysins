@@ -1239,6 +1239,41 @@ function init() {
           const detected = detectSin(isPremium ? settings : {});
           if (!detected) return;
 
+          // Frequency gating — premium users can set how often each sin warns
+          if (isPremium && detected.sinKey && detected.type === 'warning') {
+            const sinFrequencies = settings.sinFrequencies || {};
+            const freq = sinFrequencies[detected.sinKey] || 1;
+            if (freq > 1) {
+              chrome.storage.local.get(['sinPageCounts'], (countResult) => {
+                const counts = countResult.sinPageCounts || {};
+                const current = (counts[detected.sinKey] || 0) + 1;
+                counts[detected.sinKey] = current;
+                if (current >= freq) {
+                  counts[detected.sinKey] = 0;
+                  chrome.storage.local.set({ sinPageCounts: counts });
+                  // Show banner
+                  if (isPremium && detected.sinKey) {
+                    chrome.runtime.sendMessage(
+                      { type: 'getEmoji', sin: detected.sinKey },
+                      (response) => {
+                        if (response && response.emoji) {
+                          detected.displayEmoji = response.emoji;
+                        }
+                        showBanner(detected, premiumSettings);
+                      }
+                    );
+                  } else {
+                    showBanner(detected, premiumSettings);
+                  }
+                } else {
+                  chrome.storage.local.set({ sinPageCounts: counts });
+                  // Skip this page — not yet at frequency threshold
+                }
+              });
+              return;
+            }
+          }
+
           // If premium and it's a sin, ask background for a rotating emoji
           if (isPremium && detected.sinKey) {
             chrome.runtime.sendMessage(

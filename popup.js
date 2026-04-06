@@ -95,6 +95,7 @@ async function init() {
 
     // Sin toggles — premium users can choose which sins to monitor
     // Free users see all toggles ON but can't change them
+    const sinFrequencies = settings.sinFrequencies || {};
     document.querySelectorAll('.sin-toggle').forEach(toggle => {
       if (isPremium) {
         const sin = toggle.dataset.sin;
@@ -107,6 +108,25 @@ async function init() {
       } else {
         toggle.checked = true;
         toggle.disabled = true;
+      }
+    });
+
+    // Frequency dropdowns — premium only
+    document.querySelectorAll('.sin-freq-select').forEach(select => {
+      const sin = select.dataset.sin;
+      const saved = sinFrequencies[sin];
+      if (saved && saved > 1) {
+        select.value = String(saved);
+      }
+      // else keep "Frequency" placeholder selected (default = every page)
+      if (isPremium) {
+        select.disabled = false;
+        if (!select.dataset.bound) {
+          select.addEventListener('change', saveSinFrequencies);
+          select.dataset.bound = 'true';
+        }
+      } else {
+        select.disabled = true;
       }
     });
 
@@ -196,6 +216,18 @@ async function init() {
                   toggle.dataset.bound = 'true';
                 }
               });
+              const savedFreqs = (r.settings && r.settings.sinFrequencies) || {};
+              document.querySelectorAll('.sin-freq-select').forEach(select => {
+                select.disabled = false;
+                const saved = savedFreqs[select.dataset.sin];
+                if (saved && saved > 1) {
+                  select.value = String(saved);
+                }
+                if (!select.dataset.bound) {
+                  select.addEventListener('change', saveSinFrequencies);
+                  select.dataset.bound = 'true';
+                }
+              });
               document.getElementById('sins-premium-notice').style.display = 'none';
               // Unlock all premium settings sections
               document.querySelectorAll('.premium-locked').forEach(el => el.classList.remove('premium-locked'));
@@ -255,6 +287,19 @@ function saveSinToggles() {
   chrome.storage.local.get(['settings'], (result) => {
     const settings = result.settings || {};
     settings.enabledSins = enabledSins;
+    chrome.storage.local.set({ settings });
+  });
+}
+
+function saveSinFrequencies() {
+  const sinFrequencies = {};
+  document.querySelectorAll('.sin-freq-select').forEach(select => {
+    sinFrequencies[select.dataset.sin] = parseInt(select.value, 10);
+  });
+
+  chrome.storage.local.get(['settings'], (result) => {
+    const settings = result.settings || {};
+    settings.sinFrequencies = sinFrequencies;
     chrome.storage.local.set({ settings });
   });
 }

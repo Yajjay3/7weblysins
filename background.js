@@ -3,7 +3,13 @@
 // Tracks time spent on sin/virtue sites and manages premium features
 // ============================================================
 
-importScripts('ExtPay.js');
+if (typeof importScripts === 'function') {
+  try {
+    importScripts('ExtPay.js');
+  } catch (e) {
+    console.log('ExtPay import skipped:', e);
+  }
+}
 
 const EXTPAY_ID = '7weblysins';
 const extpay = typeof ExtPay === 'function' ? ExtPay(EXTPAY_ID) : null;

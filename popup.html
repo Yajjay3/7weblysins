@@ -124,6 +124,18 @@
     .sin-card[data-sin="wrath"]    { border-left-color: #e57373; }
     .sin-card[data-sin="sloth"]    { border-left-color: #90caf9; }
 
+    /* --- Frequency Dropdown --- */
+    .sin-freq-select {
+      padding: 3px 4px; font-size: 11px;
+      background: rgba(255,255,255,0.08); color: #eee;
+      border: 1px solid rgba(255,255,255,0.15); border-radius: 6px;
+      outline: none; cursor: pointer; margin-right: 8px;
+      width: auto;
+    }
+    .sin-freq-select:disabled {
+      opacity: 0.4; cursor: not-allowed;
+    }
+
     /* --- Settings --- */
     .setting-group { margin-bottom: 16px; }
     .setting-group h3 {
@@ -399,36 +411,43 @@
     <div class="sin-card" data-sin="pride">
       <span class="emoji">👑</span>
       <div><div class="name">Pride</div><div class="virtue">Counter with: Humility</div></div>
+      <select class="sin-freq-select" data-sin="pride" disabled><option value="1" disabled selected hidden>Frequency</option><option value="1">Every page</option><option value="2">Every 2 pages</option><option value="3">Every 3 pages</option><option value="4">Every 4 pages</option><option value="5">Every 5 pages</option></select>
       <label class="toggle-switch"><input type="checkbox" class="sin-toggle" data-sin="pride" checked><span class="slider"></span></label>
     </div>
     <div class="sin-card" data-sin="greed">
       <span class="emoji">💰</span>
       <div><div class="name">Greed</div><div class="virtue">Counter with: Generosity</div></div>
+      <select class="sin-freq-select" data-sin="greed" disabled><option value="1" disabled selected hidden>Frequency</option><option value="1">Every page</option><option value="2">Every 2 pages</option><option value="3">Every 3 pages</option><option value="4">Every 4 pages</option><option value="5">Every 5 pages</option></select>
       <label class="toggle-switch"><input type="checkbox" class="sin-toggle" data-sin="greed" checked><span class="slider"></span></label>
     </div>
     <div class="sin-card" data-sin="lust">
       <span class="emoji">🔥</span>
       <div><div class="name">Lust</div><div class="virtue">Counter with: Chastity</div></div>
+      <select class="sin-freq-select" data-sin="lust" disabled><option value="1" disabled selected hidden>Frequency</option><option value="1">Every page</option><option value="2">Every 2 pages</option><option value="3">Every 3 pages</option><option value="4">Every 4 pages</option><option value="5">Every 5 pages</option></select>
       <label class="toggle-switch"><input type="checkbox" class="sin-toggle" data-sin="lust" checked><span class="slider"></span></label>
     </div>
     <div class="sin-card" data-sin="envy">
       <span class="emoji">💚</span>
       <div><div class="name">Envy</div><div class="virtue">Counter with: Kindness</div></div>
+      <select class="sin-freq-select" data-sin="envy" disabled><option value="1" disabled selected hidden>Frequency</option><option value="1">Every page</option><option value="2">Every 2 pages</option><option value="3">Every 3 pages</option><option value="4">Every 4 pages</option><option value="5">Every 5 pages</option></select>
       <label class="toggle-switch"><input type="checkbox" class="sin-toggle" data-sin="envy" checked><span class="slider"></span></label>
     </div>
     <div class="sin-card" data-sin="gluttony">
       <span class="emoji">🍔</span>
       <div><div class="name">Gluttony</div><div class="virtue">Counter with: Temperance</div></div>
+      <select class="sin-freq-select" data-sin="gluttony" disabled><option value="1" disabled selected hidden>Frequency</option><option value="1">Every page</option><option value="2">Every 2 pages</option><option value="3">Every 3 pages</option><option value="4">Every 4 pages</option><option value="5">Every 5 pages</option></select>
       <label class="toggle-switch"><input type="checkbox" class="sin-toggle" data-sin="gluttony" checked><span class="slider"></span></label>
     </div>
     <div class="sin-card" data-sin="wrath">
       <span class="emoji">😡</span>
       <div><div class="name">Wrath</div><div class="virtue">Counter with: Patience</div></div>
+      <select class="sin-freq-select" data-sin="wrath" disabled><option value="1" disabled selected hidden>Frequency</option><option value="1">Every page</option><option value="2">Every 2 pages</option><option value="3">Every 3 pages</option><option value="4">Every 4 pages</option><option value="5">Every 5 pages</option></select>
       <label class="toggle-switch"><input type="checkbox" class="sin-toggle" data-sin="wrath" checked><span class="slider"></span></label>
     </div>
     <div class="sin-card" data-sin="sloth">
       <span class="emoji">🦥</span>
       <div><div class="name">Sloth</div><div class="virtue">Counter with: Diligence</div></div>
+      <select class="sin-freq-select" data-sin="sloth" disabled><option value="1" disabled selected hidden>Frequency</option><option value="1">Every page</option><option value="2">Every 2 pages</option><option value="3">Every 3 pages</option><option value="4">Every 4 pages</option><option value="5">Every 5 pages</option></select>
       <label class="toggle-switch"><input type="checkbox" class="sin-toggle" data-sin="sloth" checked><span class="slider"></span></label>
     </div>
   </div>
